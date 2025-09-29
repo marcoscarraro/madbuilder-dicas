@@ -35,3 +35,8 @@ TApplication::postData('form_interaction', 'FormInteractionsView', 'onView');
 Carregar algum conteúdo de alguma página do sistema via jquery
 TScript::create("__adianti_load_page('engine.php?class=ProcessoForm&method=onReloadPoloProcessual&static=1');");
 TScript::create( "$('#content_polo_processual').load('engine.php?class=ProcessoForm&method=onReloadPoloProcessual #content_polo_processual');");
+
+Relacionamento de objetos com o banco de dados
+Exemplo: Telefone tem uma coluna com o ID da Pessoa, logo eu posso acessar as propriedades das pessoas a partir do telefone
+$telefone->pessoa->nome_completo;
+A relação só ocorre quando a chave estrangeira estiver na tabela, por exemplo eu não consigo acessar o telefone da pessoa iniciando pelo objeto de pessoa. $pessoa->telefone->numero;
