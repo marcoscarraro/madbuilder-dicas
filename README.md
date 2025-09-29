@@ -10,14 +10,23 @@ TPage::register_css('upperCaseChaveAcesso','input[name="chave_acesso"]{ text-tra
 
 Fazer ajuste de CSS global
 $class = _CLASS_;
-        $css = "
+$css = "
+    div[page-name='{$class}'] .card-header.panel-heading {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+";
+parent::register_css("my_" . _CLASS_, $css);
 
-            div[page-name='{$class}'] .card-header.panel-heading {
-                position: sticky;
-                top: 0;
-                z-index: 1000;
-            }
 
-        ";
 
-        parent::register_css("my_" . _CLASS_, $css);
+Executar algum script jquery
+TScript::create("  window.open('{$page}', '_blank'); ");
+
+Fazer o post de um formulário 
+TApplication::postData('form_interaction', 'FormInteractionsView', 'onView');
+
+Carregar algum conteúdo de alguma página do sistema via jquery
+TScript::create("__adianti_load_page('engine.php?class=ProcessoForm&method=onReloadPoloProcessual&static=1');");
+TScript::create( "$('#content_polo_processual').load('engine.php?class=ProcessoForm&method=onReloadPoloProcessual #content_polo_processual');");
