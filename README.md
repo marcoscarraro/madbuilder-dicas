@@ -347,7 +347,7 @@ $matriculados = Matricula::where('turma_id','=',$data->turma_id)->count();
 
 ---
 ## Lembretes de sintaxe / operadores
-```yaml
+```bash
 $a == $b    // Igual
 $a != $b    // Diferente
 $a < $b     // Menor que
