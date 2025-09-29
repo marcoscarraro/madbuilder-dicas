@@ -357,5 +357,5 @@ $a >= $b    // Maior ou igual
 $valortotal += $contas["valor"]; // Incrementa
 $linha .= $conteudo; // Concatena
 ASC // Ordem crescente
-```
 DESC // Ordem decrescente
+```
