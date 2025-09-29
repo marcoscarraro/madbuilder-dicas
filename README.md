@@ -7,8 +7,6 @@ A ideia é facilitar o dia a dia com snippets prontos para formulários, banco d
 
 ---
 
-## 🎭 Manipulação de Formulários  
-
 ### Aplicar máscara em um campo específico  
 ```php
 TEntry::changeMask(self::$formName, 'chave_acesso', 'AAAA-AAAA');
@@ -22,20 +20,8 @@ TPage::register_css(
 );
 ```
 
-
-
-
-# madbuilder-dicas
-Anotações, lembretes, códigos do madbuilder.com.br
-
-Aplicar uma máscara em um campo específico do formulário, adicionar dentro do onShow()
-TEntry::changeMask(self::$formName, 'chave_acesso', 'AAAA-AAAA');
-
-Fazer algum ajuste de CSS em algum elemento do formulário, adicionar dentro do onShow()
-TPage::register_css('upperCaseChaveAcesso','input[name="chave_acesso"]{ text-transform: uppercase; }');
-
-
-Fazer ajuste de CSS global
+### Alterar estilo (CSS) global da página
+```php
 $class = _CLASS_;
 $css = "
     div[page-name='{$class}'] .card-header.panel-heading {
@@ -45,25 +31,72 @@ $css = "
     }
 ";
 parent::register_css("my_" . _CLASS_, $css);
+```
 
-
-
-Executar algum script jquery
-TScript::create("  window.open('{$page}', '_blank'); ");
+### Executar script com jQuery usando TScript
+```php
+TScript::create("window.open('{$page}', '_blank');");
+```
+```php
 TScript::create("
-            $('#{$idContainer}').parent().css('margin', '0');
-            $('#{$idContainer}').parent().parent().css('padding', 0);
-            $('#{$idContainer} .tab-pane').css('padding', 0);
-        ", true, 10);
+    $('#{$idContainer}').parent().css('margin', '0');
+    $('#{$idContainer}').parent().parent().css('padding', 0);
+    $('#{$idContainer} .tab-pane').css('padding', 0);
+", true, 10);
+```
 
-Fazer o post de um formulário 
-TApplication::postData('form_interaction', 'FormInteractionsView', 'onView');
-
-Carregar algum conteúdo de alguma página do sistema via jquery
+### Carregar conteúdo dinamicamente via jQuery
+```php
 TScript::create("__adianti_load_page('engine.php?class=ProcessoForm&method=onReloadPoloProcessual&static=1');");
-TScript::create( "$('#content_polo_processual').load('engine.php?class=ProcessoForm&method=onReloadPoloProcessual #content_polo_processual');");
+```
+```php
+TScript::create("
+    $('#content_polo_processual').load(
+        'engine.php?class=ProcessoForm&method=onReloadPoloProcessual #content_polo_processual'
+    );
+");
+```
 
-Relacionamento de objetos com o banco de dados
-Exemplo: Telefone tem uma coluna com o ID da Pessoa, logo eu posso acessar as propriedades das pessoas a partir do telefone
-$telefone->pessoa->nome_completo;
-A relação só ocorre quando a chave estrangeira estiver na tabela, por exemplo eu não consigo acessar o telefone da pessoa iniciando pelo objeto de pessoa. $pessoa->telefone->numero;
+### Fazer post de formulário via TApplication
+```php
+//TApplication::postData($formName, $class, $method = NULL, $parameters = NULL);
+TApplication::postData('form_interaction', 'FormInteractionsView', 'onView');
+```
+
+### Relacionamento de Objetos
+Se Telefone tem uma coluna com o id_pessoa:
+```php
+echo $telefone->pessoa->nome_completo;
+```
+⚠️ A relação só ocorre se a chave estrangeira existir na tabela.
+Exemplo: não é possível acessar os telefones a partir de Pessoa se a FK estiver apenas em Telefone:
+```php
+// Isso NÃO funciona
+echo $pessoa->telefone->numero;
+```
+
+### Exibir mensagem para o usuário
+```php
+new TMessage('info', 'Operação realizada com sucesso!');
+new TMessage('error', 'Ocorreu um erro durante o processo.');
+```
+
+### Redirecionar para outra página
+```php
+AdiantiCoreApplication::loadPage('NomeDaClasseView');
+```
+
+### Sessões
+```php
+TSession::setValue('usuario_logado', $usuario);
+$usuario = TSession::getValue('usuario_logado');
+TSession::freeSession(); // limpar sessão
+```
+
+### 🐞 Debug
+O MadBuilder possui funções de debug nativas:
+```php
+mad_dump($variavel); // imprime formatado e continua execução
+md($variavel);       // atalho para mad_dump
+mdd($variavel);      // imprime formatado e interrompe execução
+```
