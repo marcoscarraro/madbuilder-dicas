@@ -14,7 +14,7 @@ Esses blocos servem para inserir código sem que ele seja sobrescrito quando o B
 
 ## Blocos do Form
 
-### <fileHeader>
+### ```<fileHeader>```
 Usado no topo do arquivo. Serve para imports, namespaces, require_once e includes extras.
 
 ### <classProperties>
