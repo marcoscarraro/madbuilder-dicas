@@ -23,6 +23,11 @@ parent::register_css("my_" . _CLASS_, $css);
 
 Executar algum script jquery
 TScript::create("  window.open('{$page}', '_blank'); ");
+TScript::create("
+            $('#{$idContainer}').parent().css('margin', '0');
+            $('#{$idContainer}').parent().parent().css('padding', 0);
+            $('#{$idContainer} .tab-pane').css('padding', 0);
+        ", true, 10);
 
 Fazer o post de um formulário 
 TApplication::postData('form_interaction', 'FormInteractionsView', 'onView');
