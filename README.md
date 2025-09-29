@@ -1,3 +1,30 @@
+# MadBuilder Dicas e Anotações  
+
+📚 Documentação oficial: [docs-fw.madbuilder.com.br](http://docs-fw.madbuilder.com.br/)  
+
+Este repositório contém **exemplos, lembretes e truques práticos** para o uso do **MadBuilder Framework** (baseado no Adianti).  
+A ideia é facilitar o dia a dia com snippets prontos para formulários, banco de dados, CSS, jQuery, mensagens e debugging.  
+
+---
+
+## 🎭 Manipulação de Formulários  
+
+### Aplicar máscara em um campo específico  
+```php
+TEntry::changeMask(self::$formName, 'chave_acesso', 'AAAA-AAAA');
+```
+
+### Alterar estilo (CSS) de um campo específico
+```php
+TPage::register_css(
+    'upperCaseChaveAcesso',
+    'input[name="chave_acesso"]{ text-transform: uppercase; }'
+);
+```
+
+
+
+
 # madbuilder-dicas
 Anotações, lembretes, códigos do madbuilder.com.br
 
