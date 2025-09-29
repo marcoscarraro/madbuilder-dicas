@@ -17,95 +17,95 @@ Esses blocos servem para inserir código sem que ele seja sobrescrito quando o B
 ### ```<fileHeader>```
 Usado no topo do arquivo. Serve para imports, namespaces, require_once e includes extras.
 
-### <classProperties>
+### ```<classProperties>```
 Fica dentro da classe, antes dos métodos. Permite declarar variáveis e propriedades personalizadas.
 
-### <onBeginPageCreation>
+### ```<onBeginPageCreation>```
 Executado no início da criação da página. Bom lugar para inicializações, verificações de permissão e configurações globais.
 
-### <onBeforeAddFieldsToForm>
+### ```<onBeforeAddFieldsToForm>```
 Chamado antes de adicionar os campos ao formulário. Útil para manipular dinamicamente campos ou aplicar configurações globais.
 
-### <onAfterFieldsCreation>
+### ```<onAfterFieldsCreation>```
 Executado após todos os campos do formulário serem criados. Ideal para máscaras, validações, CSS e eventos JS.
 
-### <onAfterPageCreation>
+### ```<onAfterPageCreation>```
 Executado no final da criação da página. Usado para ajustes finais de layout, CSS global ou scripts extras.
 
-### <onSave>
+### ```<onSave>```
 Contém o código da ação Salvar (gerado automaticamente). Dentro dele existem sub-blocos como beforeStoreAutoCode, afterStoreAutoCode, fieldList-..., messageAutoCode, etc. Esses pontos permitem inserir código antes e depois da gravação no banco.
 
-### <onEdit>
+### ```<onEdit>```
 Contém o código da ação Editar (gerado automaticamente). Possui sub-blocos específicos para carregar dados mestre-detalhe (fieldList-...).
 
-### <onFormClear>
+### ```<onFormClear>```
 Executado quando o formulário é limpo (onClear). Bom para resetar variáveis adicionais ou limpar sessões.
 
-### <onShow>
+### ```<onShow>```
 Executado quando o formulário é exibido. Bom lugar para scripts ou carregamentos dinâmicos.
 
-### <userCustomFunctions>
+### ```<userCustomFunctions>```
 Fica no final da classe. Usado para declarar funções personalizadas criadas pelo desenvolvedor.
 
 ---
 
 ## Blocos do List (Datagrid)
 
-### <fileHeader>
+### ```<fileHeader>```
 Usado no topo do arquivo. Serve para imports, namespaces, require_once.
 
-### <classProperties>
+### ```<classProperties>```
 Dentro da classe, antes dos métodos. Para propriedades adicionais.
 
-### <onBeginPageCreation>
+### ```<onBeginPageCreation>```
 Executado no início da criação da página. Usado para setup inicial, permissões ou configurações globais.
 
-### <onBeforeAddFieldsToForm>
+### ```<onBeforeAddFieldsToForm>```
 Executado antes de adicionar os campos do filtro.
 
-### <onAfterFieldsCreation>
+### ```<onAfterFieldsCreation>```
 Executado após a criação dos campos de filtro. Bom para aplicar máscaras, validações ou eventos.
 
-### <onBeforeColumnsCreation>
+### ```<onBeforeColumnsCreation>```
 Chamado antes de criar as colunas da grid.
 
-### <onAfterColumnsCreation>
+### ```<onAfterColumnsCreation>```
 Chamado depois de criar as colunas da grid.
 
-### <onAfterActionsCreation>
+### ```<onAfterActionsCreation>```
 Executado após criar as ações principais (editar, excluir).
 
-### <onAfterHeaderActionsCreation>
+### ```<onAfterHeaderActionsCreation>```
 Executado após criar as ações de cabeçalho (cadastrar, exportar, etc).
 
-### <onAfterPageCreation>
+### ```<onAfterPageCreation>```
 Chamado no final da criação da página.
 
-### onDelete
+### ```onDelete```
 Contém o código da ação Excluir (gerado automaticamente).
 
-### <onBeforeDatagridSearch>
+### ```<onBeforeDatagridSearch>```
 Executado antes de aplicar os filtros de busca.
 
-### <onDatagridSearch>
+### ```<onDatagridSearch>```
 Executado durante a aplicação da busca.
 
-### <onBeforeDatagridLoad>
+### ```<onBeforeDatagridLoad>```
 Executado antes de carregar os registros no banco.
 
-### <onBeforeDatagridAddItem>
+### ```<onBeforeDatagridAddItem>```
 Executado antes de adicionar cada item (linha) na grid.
 
-### <onAfterDatagridAddItem>
+### ```<onAfterDatagridAddItem>```
 Executado após adicionar cada item na grid. Bom para estilizar linhas, adicionar ícones, badges, etc.
 
-### <onBeforeDatagridTransactionClose>
+### ```<onBeforeDatagridTransactionClose>```
 Executado antes de fechar a transação de carregamento.
 
-### <onShow>
+### ```<onShow>```
 Executado quando a listagem é exibida.
 
-### <userCustomFunctions>
+### ```<userCustomFunctions>```
 Fica no final da classe. Usado para criar funções personalizadas do desenvolvedor.
 
 ---
