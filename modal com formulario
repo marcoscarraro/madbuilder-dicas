@@ -1,0 +1,24 @@
+            // Cria o formulário que vai dentro do modal
+            $form2 = new BootstrapFormBuilder('form_modal');
+            //$form2->setFormTitle('Selecionar Categoria');
+
+            // Monta o TDBCombo
+            $criteria_portaria_selecionada2 = new TCriteria();
+            $portaria_selecionada2 = new TDBCombo('portaria_selecionada2', 'bilheteria', 'Portaria', 'id', '{nome}','nome asc' , $criteria_portaria_selecionada2 );
+            $portaria_selecionada2->setSize('100%');
+
+            // Insere no formulário
+            $form2->addFields([$portaria_selecionada2]);
+
+            // Botão de salvar
+            $action2 = new TAction(['ControlePortariaForm', 'processaLeitura']);
+            $form2->addAction('Salvar', $action2, 'fa:save green');
+
+            // Cria a janela modal
+            $window2 = TWindow::create('Portaria', 0.3, null);
+            $window2->removePadding();
+            $window2->disableEscape();
+            $window2->disableScrolling();
+            // Adiciona na janela o HTML do formulário
+            $window2->add($form2);
+            $window2->show();
