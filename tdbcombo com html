@@ -1,0 +1,16 @@
+Editar a model da tabela, e criar um método chamado get_tipo_ingresso_html depois será chamado como tipo_ingresso_html
+
+    public function get_tipo_ingresso_html()
+    {
+        return "{$this->nome}<br> {$this->descricao}<br> Quantidade: {$this->quantidade} Ingressos | Valor Total: {$this->preco}";
+    }
+
+No TDBCombo o atributo a ser exibido será o {tipo_ingresso_html}
+
+Ajsutar o CSS no arquivo builder_user_custom_css.css
+
+[page_name="ComprarIngressoPublicForm"] .select2-container--default .select2-selection--single {
+    min-height: var(--field-height) !important;
+    height: auto!important;
+}
+
