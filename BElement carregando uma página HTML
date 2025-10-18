@@ -1,0 +1,14 @@
+Adicione um BElement com tipo div na sua página.
+
+Crie um código HTML com o conteúdo HTML que você deseja mostrar naquele campo
+
+No código fonte da página que tem o BElement faça a inserção usando o THtmlRenderer, bastante atenção que precisa ser feita dentro do bloco //<onBeforeAddFieldsToForm>
+
+ //<onBeforeAddFieldsToForm>
+
+  $bannerHtmlFile = new THtmlRenderer('app/resources/bannerComprarIngresso.html');
+  $bannerHtmlFile->enableSection('main');
+  $banner_comprar_ingresso->add($bannerHtmlFile);
+
+
+
