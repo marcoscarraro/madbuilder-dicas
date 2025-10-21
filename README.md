@@ -265,6 +265,11 @@ TWindow::closeWindow();
 TScript::create("Template.closeRightPanel()");
 ```
 
+### Redirecionar para um site externo
+```php
+TScript::create('window.location.href = "https://www.termaspiratuba.com.br/";');
+```
+
 ### Validações
 ```php
 (new TRequiredValidator)->validate('Forma de Pagamento', $param['tipo_pagamento_id']);
