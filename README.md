@@ -267,7 +267,7 @@ TScript::create("Template.closeRightPanel()");
 
 ### Redirecionar para um site externo
 ```php
-TScript::create('window.location.href = "https://www.termaspiratuba.com.br/";');
+TScript::create('window.location.href = "https://www.trisistemas.com.br/";');
 ```
 
 ### Validações
