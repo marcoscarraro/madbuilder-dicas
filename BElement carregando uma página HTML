@@ -12,3 +12,13 @@ No código fonte da página que tem o BElement faça a inserção usando o THtml
 
 
 
+Se precisar informar um novo conteúdo no BElement pode er feito assim.
+
+  $this->banner_comprar_ingresso->children=[]; // isso limpa o conteúdo, se não limpar o sistema vai incrementar
+  $this->banner_comprar_ingresso->add('testeeeeeeeeeeeeeeeeeeee'); // adiciona novo conteudo
+
+Isso só vai funcionar se o método que vai chamar o $this->banner... não for estático, caso for estático precisa fazer desta forma
+
+  $self = new self($param);
+  $self->banner_comprar_ingresso
+
