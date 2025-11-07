@@ -1,0 +1,7 @@
+Para limitar a range de seleção do tdate basta passar no setOption os valores startDate e endDate que são lidos pelo JS posteriormente.
+
+        //<onBeforeAddFieldsToForm>
+        // Data mínima = hoje
+        $data_utilizacao->setOption('startDate', date('d/m/Y'));
+        // Data máxima = 30 dias após hoje
+        $data_utilizacao->setOption('endDate', date('d/m/Y', strtotime('+30 days')));
