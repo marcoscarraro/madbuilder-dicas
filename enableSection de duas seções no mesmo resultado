@@ -1,0 +1,14 @@
+Este é um exemplo quando precisa ativar duas seções de um mesmo arquivo no mesmo resultado, o segredo está na concatenação dos getContents()
+
+
+                        $css_status = new THtmlRenderer('app/resources/status_pagamento.html');
+                        $css_status->enableSection('css');
+                        $html_status = new THtmlRenderer('app/resources/status_pagamento.html');
+                        $html_status->enableSection('pendente', [
+                            'pagamento_id' => $criaVenda['pagamento_id'],
+                            'valor'        => $criaVenda['valor'],
+                            'data_atual'   => date('d/m/Y H:i')
+                        ]);
+                        $html_status = $css_status->getContents().$html_status->getContents();
+                        TScript::create("$('#html_resumo_compra').empty();");
+                        TScript::create("$('#html_status_pagamento').html(`{$html_status}`);");
