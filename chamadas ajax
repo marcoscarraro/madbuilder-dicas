@@ -20,3 +20,7 @@ Este exemplo faz a chamada de um método via ajax e manda o resultado para a tel
 
       TScript::create("__adianti_ajax_exec('class=VendaIngressoPublicEtapa2form&method=onPopularTfield',null,true);");
 
+
+Fazer submit do formulário usando o método padrão
+      $formName = self::$formName;
+      TScript::create("__adianti_post_data('{$formName}', 'class=VendaIngressoPublicEtapa2form&method=onPopularTfield');");
