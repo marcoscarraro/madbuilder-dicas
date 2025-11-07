@@ -1,0 +1,22 @@
+Faz post dos dados do formulário para o método sem mostrar em tela, dessa form fica em background
+
+      // Inicia polling para consultar os pgamentos
+      $formName = self::$formName;
+      TScript::create("
+                      window.mp_polling = setInterval(function() {
+                          __adianti_post_exec(
+                              'class=VendaIngressoPublicEtapa4form&method=onConsultaPagamento',
+                              $('#{$formName}').serialize(),
+                              null,
+                              null,
+                              true
+                          );
+                      }, {$interval});
+                  ");
+
+
+
+Este exemplo faz a chamada de um método via ajax e manda o resultado para a tela de forma automática, isso é definido no último TRUE.
+
+      TScript::create("__adianti_ajax_exec('class=VendaIngressoPublicEtapa2form&method=onPopularTfield',null,true);");
+
