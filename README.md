@@ -114,6 +114,11 @@ Fica no final da classe. Usado para criar funções personalizadas do desenvolve
 ```php
 TEntry::changeMask(self::$formName, 'chave_acesso', 'AAAA-AAAA');
 ```
+### Adicionar um estilo inline (CSS) de um elemento específico
+Precisa ser feito antes de montar a página
+```php
+$text31->style = 'float: right !important;';
+```
 
 ### Alterar estilo (CSS) de um campo específico
 ```php
