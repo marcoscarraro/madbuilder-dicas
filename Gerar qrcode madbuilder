@@ -1,0 +1,9 @@
+Como o madbuilder usar um fork do Adianti versão 7.5 a biblioteca bacon é a versão 2.0
+
+Onde $ingresso->id é o conteúdo que você deseja que o seu qrcode tenha.
+
+$backend  = new \BaconQrCode\Renderer\Image\SvgImageBackEnd;
+$renderer = new \BaconQrCode\Renderer\ImageRenderer(new \BaconQrCode\Renderer\RendererStyle\RendererStyle((int) 200, 0), $backend);
+$writer   = new \BaconQrCode\Writer($renderer);
+$qrcode_generated = $writer->writeString($ingresso->id);
+$qrcode = 'data:image/png;base64,' . base64_encode($qrcode_generated);
