@@ -1,0 +1,10 @@
+IOS não funciona direito com servidor web que suporta HTTP2, para resolver isso é preciso
+desabilitar o suporte à http2 no nginx proxy manager
+gerar novamente os certificados ssl
+e na opção advanced informar as seguintes configurações
+
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_hide_header Upgrade;
+
