@@ -7,3 +7,10 @@ Notificacoes::where('vendas_id','=',$consultaPagamento->vendas_id)
 
 `Para filtrar com filtro IN`
 Matriculas::where('id', 'in', $frequencia_matriculas_to_string)->last();
+
+
+`Aplicar operador OR em uma consulta`
+        $matriculas = Matriculas::select('id')
+                                ->where('turmas_id', '=', $this->id)
+                                ->where('status','=','M', TExpression::OR_OPERATOR)
+                                ->where('status','=','C', TExpression::OR_OPERATOR)->count();
