@@ -1,6 +1,9 @@
 dicas de sql
 
-Para filtrar data_email is not null.
+`Para filtrar data_email is not null.`
 Notificacoes::where('vendas_id','=',$consultaPagamento->vendas_id)
                                                     ->where('template_mensagens_id','=',TemplateMensagens::EMAIL_PAGAMENTO_CONFIRMADO)
                                                     ->where('data_email','is not',null)->last();
+
+`Para filtrar com filtro IN`
+Matriculas::where('id', 'in', $frequencia_matriculas_to_string)->last();
