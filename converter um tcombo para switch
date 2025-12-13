@@ -1,0 +1,65 @@
+Em um TFieldList tinha um tcombo, e precisava converter para switch para ficar melhor a experiência...
+
+        //<onAfterPageCreation>
+        TPage::register_css(
+            'switch-select',
+            'select.switch-hidden { position: absolute; opacity: 0; pointer-events: none; }
+            .switch-container { display: inline-flex; align-items: center; background: #e0e0e0; border-radius: 3px; padding: 3px; cursor: pointer; transition: background-color 0.3s ease; user-select: none; }
+            .switch-option { padding: 8px 12px; border-radius: 2px; font-size: 14px; font-weight: 500; transition: all 0.3s ease; color: #666; white-space: nowrap; }
+            .switch-option.active { background: #4CAF50; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+            .switch-container.falta-active { background: #ffebee; }
+            .switch-option.active.falta { background: #f44336; }
+            .switch-option:hover:not(.active) { color: #333; }'
+        );
+        TScript::create("
+        function convertSelectToSwitch(selector) {
+            document.querySelectorAll(selector).forEach(function(select) {
+                if (select.classList.contains('switch-converted')) return;
+                
+                select.classList.add('switch-converted', 'switch-hidden');
+                
+                const container = document.createElement('div');
+                container.className = 'switch-container';
+                
+                Array.from(select.options).forEach(function(option, index) {
+                    const switchOption = document.createElement('div');
+                    switchOption.className = 'switch-option';
+                    switchOption.textContent = option.text;
+                    switchOption.dataset.value = option.value;
+                    
+                    if (option.value === 'F') {
+                        switchOption.classList.add('falta');
+                    }
+                    
+                    if (option.selected) {
+                        switchOption.classList.add('active');
+                        if (option.value === 'F') {
+                            container.classList.add('falta-active');
+                        }
+                    }
+                    
+                    switchOption.addEventListener('click', function() {
+                        container.querySelectorAll('.switch-option').forEach(function(opt) {
+                            opt.classList.remove('active');
+                        });
+                        switchOption.classList.add('active');
+                        
+                        select.value = switchOption.dataset.value;
+                        select.dispatchEvent(new Event('change', { bubbles: true }));
+                        
+                        if (switchOption.dataset.value === 'F') {
+                            container.classList.add('falta-active');
+                        } else {
+                            container.classList.remove('falta-active');
+                        }
+                    });
+                    
+                    container.appendChild(switchOption);
+                });
+                
+                select.parentNode.insertBefore(container, select.nextSibling);
+            });
+        }
+
+        convertSelectToSwitch('select.switch-select');
+        ");
