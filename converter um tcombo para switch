@@ -11,7 +11,7 @@ Em um TFieldList tinha um tcombo, e precisava converter para switch para ficar m
             .switch-option.active.falta { background: #f44336; }
             .switch-option:hover:not(.active) { color: #333; }'
         );
-        TScript::create("
+                TScript::create("
         function convertSelectToSwitch(selector) {
             document.querySelectorAll(selector).forEach(function(select) {
                 if (select.classList.contains('switch-converted')) return;
@@ -21,7 +21,7 @@ Em um TFieldList tinha um tcombo, e precisava converter para switch para ficar m
                 const container = document.createElement('div');
                 container.className = 'switch-container';
                 
-                Array.from(select.options).forEach(function(option, index) {
+                Array.from(select.options).forEach(function(option) {
                     const switchOption = document.createElement('div');
                     switchOption.className = 'switch-option';
                     switchOption.textContent = option.text;
@@ -43,7 +43,6 @@ Em um TFieldList tinha um tcombo, e precisava converter para switch para ficar m
                             opt.classList.remove('active');
                         });
                         switchOption.classList.add('active');
-                        
                         select.value = switchOption.dataset.value;
                         select.dispatchEvent(new Event('change', { bubbles: true }));
                         
@@ -59,7 +58,41 @@ Em um TFieldList tinha um tcombo, e precisava converter para switch para ficar m
                 
                 select.parentNode.insertBefore(container, select.nextSibling);
             });
+            alert(1);
         }
 
-        convertSelectToSwitch('select.switch-select');
+        /*Cria função global*/
+        window.reconvertSwitches = function() {
+            convertSelectToSwitch('select.switch-select:not(.switch-converted)');
+        };
+
+        /*Converte os switches iniciais*/
+        window.reconvertSwitches();
         ");
+
+
+
+
+
+
+
+
+Para atualizar e ajustar as novas linhas novamente basta chamar a função global
+
+// usar após o sendData
+TScript::create("
+    setTimeout(function() {
+        /* Remove switches antigos que podem ter ficado */
+        document.querySelectorAll('.switch-container').forEach(function(el) {
+            el.remove();
+        });
+        
+        /* Remove a classe de convertido para reconverter */
+        document.querySelectorAll('select.switch-converted').forEach(function(select) {
+            select.classList.remove('switch-converted', 'switch-hidden');
+        });
+        
+        /* Reconverte tudo */
+        window.reconvertSwitches();
+    }, 700);
+");
