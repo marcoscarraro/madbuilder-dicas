@@ -254,6 +254,8 @@ $matriculados = Matricula::where('turma_id','=',$data->turma_id)->count();
 ---
 ## Aplicar validação de campo no formulário livre, ou em alguma ação específica
 ```php
+    (new TRequiredValidator)->validate('Data da aula', $dados_form->calendario_aula_id);
+    // Para validar os valores de um tfieldlist
     (new TRequiredListValidator)->validate('Quantidade', $data->qtd_ingresso_compra);
     (new TRequiredListValidator)->validate('Tipo de ingresso', $data->tipo_ingresso);
 ```
