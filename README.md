@@ -7,109 +7,6 @@ A ideia é facilitar o dia a dia com snippets prontos para formulários, banco d
 
 ---
 
-## Blocos de Personalização do MadBuilder  
-
-O MadBuilder gera arquivos de **Formulário** e **Listagem (Datagrid)** com blocos especiais de comentário.  
-Esses blocos servem para inserir código sem que ele seja sobrescrito quando o Builder regenerar o arquivo.  
-
-## Blocos do Form
-
-### ```<fileHeader>```
-Usado no topo do arquivo. Serve para imports, namespaces, require_once e includes extras.
-
-### ```<classProperties>```
-Fica dentro da classe, antes dos métodos. Permite declarar variáveis e propriedades personalizadas.
-
-### ```<onBeginPageCreation>```
-Executado no início da criação da página. Bom lugar para inicializações, verificações de permissão e configurações globais.
-
-### ```<onBeforeAddFieldsToForm>```
-Chamado antes de adicionar os campos ao formulário. Útil para manipular dinamicamente campos ou aplicar configurações globais.
-
-### ```<onAfterFieldsCreation>```
-Executado após todos os campos do formulário serem criados. Ideal para máscaras, validações, CSS e eventos JS.
-
-### ```<onAfterPageCreation>```
-Executado no final da criação da página. Usado para ajustes finais de layout, CSS global ou scripts extras.
-
-### ```<onSave>```
-Contém o código da ação Salvar (gerado automaticamente). Dentro dele existem sub-blocos como beforeStoreAutoCode, afterStoreAutoCode, fieldList-..., messageAutoCode, etc. Esses pontos permitem inserir código antes e depois da gravação no banco.
-
-### ```<onEdit>```
-Contém o código da ação Editar (gerado automaticamente). Possui sub-blocos específicos para carregar dados mestre-detalhe (fieldList-...).
-
-### ```<onFormClear>```
-Executado quando o formulário é limpo (onClear). Bom para resetar variáveis adicionais ou limpar sessões.
-
-### ```<onShow>```
-Executado quando o formulário é exibido. Bom lugar para scripts ou carregamentos dinâmicos.
-
-### ```<userCustomFunctions>```
-Fica no final da classe. Usado para declarar funções personalizadas criadas pelo desenvolvedor.
-
----
-
-## Blocos do List (Datagrid)
-
-### ```<fileHeader>```
-Usado no topo do arquivo. Serve para imports, namespaces, require_once.
-
-### ```<classProperties>```
-Dentro da classe, antes dos métodos. Para propriedades adicionais.
-
-### ```<onBeginPageCreation>```
-Executado no início da criação da página. Usado para setup inicial, permissões ou configurações globais.
-
-### ```<onBeforeAddFieldsToForm>```
-Executado antes de adicionar os campos do filtro.
-
-### ```<onAfterFieldsCreation>```
-Executado após a criação dos campos de filtro. Bom para aplicar máscaras, validações ou eventos.
-
-### ```<onBeforeColumnsCreation>```
-Chamado antes de criar as colunas da grid.
-
-### ```<onAfterColumnsCreation>```
-Chamado depois de criar as colunas da grid.
-
-### ```<onAfterActionsCreation>```
-Executado após criar as ações principais (editar, excluir).
-
-### ```<onAfterHeaderActionsCreation>```
-Executado após criar as ações de cabeçalho (cadastrar, exportar, etc).
-
-### ```<onAfterPageCreation>```
-Chamado no final da criação da página.
-
-### ```onDelete```
-Contém o código da ação Excluir (gerado automaticamente).
-
-### ```<onBeforeDatagridSearch>```
-Executado antes de aplicar os filtros de busca.
-
-### ```<onDatagridSearch>```
-Executado durante a aplicação da busca.
-
-### ```<onBeforeDatagridLoad>```
-Executado antes de carregar os registros no banco.
-
-### ```<onBeforeDatagridAddItem>```
-Executado antes de adicionar cada item (linha) na grid.
-
-### ```<onAfterDatagridAddItem>```
-Executado após adicionar cada item na grid. Bom para estilizar linhas, adicionar ícones, badges, etc.
-
-### ```<onBeforeDatagridTransactionClose>```
-Executado antes de fechar a transação de carregamento.
-
-### ```<onShow>```
-Executado quando a listagem é exibida.
-
-### ```<userCustomFunctions>```
-Fica no final da classe. Usado para criar funções personalizadas do desenvolvedor.
-
----
-
 ### Aplicar máscara em um campo específico  
 ```php
 TEntry::changeMask(self::$formName, 'chave_acesso', 'AAAA-AAAA');
@@ -354,6 +251,12 @@ Calendario::select('data,ano')where('data_calendario','=', $dataAula->format('Y/
 $matriculados = Matricula::where('turma_id','=',$data->turma_id)->count();
 ```
 
+---
+## Aplicar validação de campo no formulário livre, ou em alguma ação específica
+```php
+    (new TRequiredListValidator)->validate('Quantidade', $data->qtd_ingresso_compra);
+    (new TRequiredListValidator)->validate('Tipo de ingresso', $data->tipo_ingresso);
+```
 
 ---
 ## Lembretes de sintaxe / operadores
@@ -369,3 +272,4 @@ $linha .= $conteudo; // Concatena
 ASC // Ordem crescente
 DESC // Ordem decrescente
 ```
+
