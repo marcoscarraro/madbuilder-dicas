@@ -14,3 +14,14 @@ Matriculas::where('id', 'in', $frequencia_matriculas_to_string)->last();
                                 ->where('turmas_id', '=', $this->id)
                                 ->where('status','=','M', TExpression::OR_OPERATOR)
                                 ->where('status','=','C', TExpression::OR_OPERATOR)->count();
+
+
+
+Para utilizar os operadores E e `OU´ ao mesmo tempo, é necessário criar um critério composto, ou seja, um critério que irá receber outros dois critérios.
+//Filtra apenas as matriculas do aluno ou dos alunos que a pessoa é responsável 
+$user_id_logado = TSession::getValue("userid");
+$criteria_matriculas = new TCriteria;  
+$criteria_matriculas->add(new TFilter('pessoas_id', '=', "(SELECT id FROM pessoas WHERE system_users_id = '{$user_id_logado}')"),TExpression::OR_OPERATOR);
+$criteria_matriculas->add(new TFilter('pessoas_id', 'in', "(SELECT id FROM pessoas WHERE responsavel_financeiro_id in (SELECT id FROM pessoas WHERE system_users_id = '{$user_id_logado}'))"),TExpression::OR_OPERATOR);
+$criteria_matriculas->add(new TFilter('pessoas_id', 'in', "(SELECT id FROM pessoas WHERE responsavel_pedagogico_id in (SELECT id FROM pessoas WHERE system_users_id = '{$user_id_logado}'))"),TExpression::OR_OPERATOR);
+$this->filter_criteria->add($criteria_matriculas, TExpression::OR_OPERATOR);  
