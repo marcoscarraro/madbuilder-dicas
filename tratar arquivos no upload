@@ -1,0 +1,67 @@
+
+
+// Cria uma estrutura com o ano/mes
+$ano = date('Y');
+$mes = date('m');
+$caminho_arquivo_dir = "app/output/{$ano}/{$mes}";
+
+// Pega o nome do arquivo, e calcula o tamanho
+$arquivo = DevHelper::decodeJsonUpload($data->caminho_arquivo);
+$object->tamanho_arquivo = DevHelper::tamanhoArquivo($arquivo['fileName']);
+$object->nome_arquivo = DevHelper::nomeArquivo($arquivo['fileName']);
+
+
+
+//Funções auxiliares
+// Retorna apenas o nome do arquivo
+public static function nomeArquivo($caminho)
+{
+    if (!$caminho) {
+        return null;
+    }
+
+    return basename($caminho);
+}
+
+//Calcula o tamanho do arquivo
+public static function tamanhoArquivo($caminho, $casasDecimais = 2){
+    if (!$caminho || !file_exists($caminho)) {
+        return null;
+    }
+
+    $bytes = filesize($caminho);
+
+    if ($bytes === false) {
+        return null;
+    }
+
+    $unidades = ['B', 'KB', 'MB', 'GB', 'TB'];
+    $i = 0;
+
+    while ($bytes >= 1024 && $i < count($unidades) - 1) {
+        $bytes /= 1024;
+        $i++;
+    }
+
+    return round($bytes, $casasDecimais) . ' ' . $unidades[$i];
+}
+
+//Converte a o post do arquivo para um json para poder capturar os nomes
+public static function decodeJsonUpload($valor)
+{
+    if (!$valor || !is_string($valor)) {
+        return null;
+    }
+
+    // Decodifica URL
+    $json = urldecode($valor);
+
+    // Decodifica JSON
+    $dados = json_decode($json, true);
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return null;
+    }
+
+    return $dados;
+}
