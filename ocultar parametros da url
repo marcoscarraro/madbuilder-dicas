@@ -1,0 +1,5 @@
+Edite o arquivo app/lib/include/application.js
+
+Adianti.registerState = false;
+
+Isso irá ocultar os parametros passados em URL.
