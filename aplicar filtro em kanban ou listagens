@@ -1,0 +1,116 @@
+//<onAfterAddKanban>
+
+// =====================================================
+// PANEL
+// =====================================================
+$panel_buttons = new TPanelGroup('Interessados');
+$panel_buttons->datagrid = 'datagrid-container';
+
+// =====================================================
+// FORM (necessário para actions)
+// =====================================================
+$form_header_buttons = new TForm('form_header_interessados');
+
+// =====================================================
+// HEADER ACTIONS (flex)
+// =====================================================
+$headerActions = new TElement('div');
+$headerActions->class = ' datagrid-header-actions ';
+$headerActions->style = 'justify-content: space-between;';
+
+// =====================================================
+// LEFT ACTIONS
+// =====================================================
+$leftActions = new TElement('div');
+$leftActions->class = ' datagrid-header-actions-left-actions ';
+
+// =====================================================
+// BOTÃO: Cadastrar
+// =====================================================
+$btnCadastrar = new TButton('btn_cadastrar');
+$btnCadastrar->setAction(new TAction(['InteressadosForm', 'onShow']), 'Novo Interessado');
+$btnCadastrar->addStyleClass('btn-default');
+$btnCadastrar->setImage('fas:plus #69aa46');
+$form_header_buttons->addField($btnCadastrar);
+
+// =====================================================
+// BOTÃO: Filtrar
+// =====================================================
+$btnFiltrar = new TButton('btn_filtrar');
+$btnFiltrar->setAction(new TAction([__CLASS__, 'onShow']), 'Filtros');
+$btnFiltrar->addStyleClass('btn-default');
+$btnFiltrar->setImage('fas:filter #000000');
+$form_header_buttons->addField($btnFiltrar);
+
+// =====================================================
+// BOTÃO: Limpar
+// =====================================================
+$btnLimpar = new TButton('btn_limpar');
+$btnLimpar->setAction(new TAction([__CLASS__, 'onShow']), 'Limpar filtros');
+$btnLimpar->addStyleClass('btn-default');
+$btnLimpar->setImage('fas:eraser #f44336');
+$form_header_buttons->addField($btnLimpar);
+
+// =====================================================
+// ADD BOTÕES NO CONTAINER
+// =====================================================
+$leftActions->add($btnCadastrar);
+$leftActions->add($btnFiltrar);
+$leftActions->add($btnLimpar);
+
+// =====================================================
+// MONTA HEADER
+// =====================================================
+$headerActions->add($leftActions);
+$form_header_buttons->add($headerActions);
+
+// =====================================================
+// FINALIZA PANEL
+// =====================================================
+$panel_buttons->add($form_header_buttons);
+
+// Cria um novo container temporário
+$wrapper = new TElement('div');
+
+// Adiciona na ordem correta
+if(empty($param['target_container']))
+{
+    $wrapper->add(TBreadCrumb::create(["Comercial","Interessados"]));
+}
+$wrapper->add($panel_buttons); //adiciona no container os botões das ações
+$wrapper->add($kanban);
+
+// Limpa o container original
+$container->clearChildren();
+
+// Reinsere tudo na ordem correta
+$container->add($wrapper);
+
+
+
+
+
+
+
+public  function onClearFiltros($param = null) 
+{
+    try 
+    {
+
+        TSession::setValue(__CLASS__.'_filter_data', NULL);
+        TSession::setValue(__CLASS__.'_filters', NULL);
+        $this->onShow();
+
+    }
+    catch (Exception $e) 
+    {
+        new TMessage('error', $e->getMessage());    
+    }
+}
+
+
+
+
+
+Crie um formulário livre que servirá para gerar as regras de filtros e gravar na sessão.
+
