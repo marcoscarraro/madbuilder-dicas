@@ -91,7 +91,7 @@ $container->add($wrapper);
 
 
 
-
+//Função para limpar os filtros da sessão, chamada pelo botão limpar filtros
 public  function onClearFiltros($param = null) 
 {
     try 
@@ -113,4 +113,51 @@ public  function onClearFiltros($param = null)
 
 
 Crie um formulário livre que servirá para gerar as regras de filtros e gravar na sessão.
+função para gravar na sessão os filtros
+    public function onSearch($param = null) 
+    {
+        try
+        {
+            TSession::setValue('InteressadosKanbanView_filter_data', NULL);
+            TSession::setValue('InteressadosKanbanView_filters', NULL);
 
+            $data = $this->form->getData();
+            $filters = [];
+
+            if (!empty($data->pessoa_id)){
+                $filters[] = new TFilter('pessoas_id', '=', $data->pessoa_id);
+            }
+
+            TSession::setValue('InteressadosKanbanView_filter_data', $data);
+            TSession::setValue('InteressadosKanbanView_filters', $filters);
+
+            TScript::create("Template.closeRightPanel();");
+            TApplication::loadPage('InteressadosKanbanView', 'onShow');
+
+        }
+        catch (Exception $e)
+        {
+            new TMessage('error', $e->getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+Ajuste após o bloco //<onBeforeLoadData> para aplicar os filtros no $criteria, de acordo com a variavel $criteria existente.
+
+//Aplica o filtro pegando os valores da sessão
+if($filters = TSession::getValue('InteressadosKanbanView_filters'))
+{
+    foreach ($filters as $filter) 
+    {
+        $criteriaItem->add($filter);       
+    }
+}
