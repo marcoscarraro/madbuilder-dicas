@@ -38,6 +38,18 @@ $css = "
 parent::register_css("my_" . _CLASS_, $css);
 ```
 
+### Informar uma classe css para uma $row específica
+```php
+$row3->class = 'row-full-width';
+TPage::register_css(
+    'row-full-width',
+    '.row-full-width .fb-inline-field-container {
+        width: 100% !important;
+        float: none !important;
+        display: block !important;
+    }');
+```
+
 ### Executar script com jQuery usando TScript
 ```php
 TScript::create("window.open('{$page}', '_blank');");
