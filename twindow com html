@@ -1,0 +1,7 @@
+            $html_tags = 'conteúdo html';
+
+            $element_tags = new BElement('div');
+            $element_tags->add($html_tags);
+            $window = TWindow::create('Tags disponíveis para o contrato', 0.8, 650);
+            $window->add($element_tags);
+            $window->show();
