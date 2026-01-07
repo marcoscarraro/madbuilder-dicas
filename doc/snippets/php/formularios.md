@@ -148,6 +148,12 @@ throw new Exception('O instrutor não está disponível neste período');
 
 ---
 
+## Para retornar os dados para o formulário após catch (Exception $e) basta usar o código abaixo dentro do catch
+```php
+$this->form->setData( $this->form->getData() );
+```
+---
+
 ## 📎 Observações finais
 
 - Sempre valide os dados antes de salvar
