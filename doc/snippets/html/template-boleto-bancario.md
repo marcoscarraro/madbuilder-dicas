@@ -1,29 +1,41 @@
 # 🧾 Template HTML – Boleto Bancário  
 (MadBuilder / Adianti)
 
-Este snippet apresenta um **template HTML genérico de boleto bancário**,
-compatível com o **AdiantiHTMLDocumentParser**, pronto para:
+Este snippet apresenta um **template HTML completo de boleto bancário**, estruturado com **todos os campos normalmente exigidos pela FEBRABAN**, compatível com o **AdiantiHTMLDocumentParser**.
+
+Ele foi pensado para:
 
 - geração de PDF
 - substituição automática de tags `{$variavel}`
-- uso com dados vindos do banco
-- relatórios financeiros
+- uso com dados vindos diretamente do banco
+- relatórios financeiros e emissão de boletos via gateway
 
-⚠️ **Todas as informações sensíveis foram removidas ou anonimizadas**.
-Este template é apenas estrutural e visual.
+⚠️ **Este template mantém a estrutura exigida**, porém **os dados reais (linha digitável, código de barras, nosso número, etc.) devem ser fornecidos por um banco ou gateway homologado**.
 
 ---
 
 ## 🎯 Objetivo do template
 
-- Servir como base para boletos
-- Permitir substituição dinâmica de dados
-- Ser usado com `setMaster()`
-- Gerar PDF com layout padrão
+- Servir como **base visual e estrutural de boleto bancário**
+- Atender aos **campos obrigatórios definidos pela FEBRABAN**
+- Permitir substituição dinâmica de dados via `setMaster()`
+- Facilitar geração de PDF a partir de HTML
+- Centralizar o layout do boleto fora do código PHP
 
 ---
 
-## 🧱 Template HTML (sanitizado)
+## 🧱 Template HTML (estrutura FEBRABAN)
+
+> ⚠️ **Altere com cuidado o HTML**  
+> Ele contém:
+> - Cabeçalho do beneficiário  
+> - Linha digitável  
+> - Dados do título  
+> - Dados do pagador  
+> - Instruções  
+> - Recibo do pagador  
+> - Ficha de compensação  
+> - Área de código de barras  
 
 ```html
 <html charset="UTF-8">
@@ -308,15 +320,6 @@ $html->saveAsPDF($destino, 'A4', 'portrait');
 
 ---
 
-## ⚠️ Observações importantes
-
-- Este template **não segue padrão FEBRABAN**
-- Não substitui biblioteca de geração de boleto
-- Serve para **visualização, PDF e comprovantes**
-- Ajuste layout conforme o banco/gateway
-
----
-
 ## 💡 Boas práticas
 
 - Gere o código de barras via lib própria
@@ -330,7 +333,3 @@ $html->saveAsPDF($destino, 'A4', 'portrait');
 
 Este snippet é uma **base genérica de layout de boleto**.
 
-Para geração oficial:
-- utilize gateways bancários
-- respeite layout homologado
-- siga regras do banco emissor
