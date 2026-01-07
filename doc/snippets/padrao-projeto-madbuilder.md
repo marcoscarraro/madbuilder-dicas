@@ -52,7 +52,6 @@ Adicionar nas **Header Tags** do projeto:
 
 ### Cadastro
 - Abertura em **cortina lateral**
-- Largura padrão definida no form
 
 ### Listagem
 - Busca no **cabeçalho**
@@ -76,21 +75,19 @@ Adicionar nas **Header Tags** do projeto:
 - Ícone: `fas fa-search`
 
 ### Ações padrão
-Utilizar ações prontas:
 - Atualizar
 - Limpar filtros
 - Buscar
 
-### Organização visual dos elementos
-Ordem recomendada:
-1. Cadastrar
-2. Atualizar
-3. Input de busca
-4. Buscar
-5. Limpar
+### Organização visual
+1. Cadastrar  
+2. Atualizar  
+3. Input de busca  
+4. Buscar  
+5. Limpar  
 
 ### Colunas
-- **Todas as colunas ordenáveis**
+- **Todas ordenáveis**
 
 ### Página
 - Remover ícone do menu lateral (quando aplicável)
@@ -111,8 +108,6 @@ Ordem recomendada:
 
 ## 🗄️ Padrão de conexão com o banco de dados
 
-### Estrutura obrigatória
-
 ```php
 try {
 
@@ -131,51 +126,44 @@ try {
 }
 ```
 
-📌 Regras importantes:
+📌 Regras:
 - Sempre abrir e fechar a transação
-- Sempre usar `rollback` em caso de erro
+- Sempre usar `rollback` em erro
 - Nunca engolir exceções
 
 ---
 
 ## 🧠 Padrão para Classes Service
 
-### O que a Service **PODE** fazer
-- Requisições externas
-- Tratamento de dados
-- Validações de regra de negócio
-- Processamento de informações
+### A Service PODE
+- Tratar dados
+- Validar regras de negócio
+- Fazer integrações externas
 
-### O que a Service **NÃO PODE** fazer
-- ❌ Abrir conexão com o banco
-- ❌ Fechar transação
+### A Service NÃO PODE
+- ❌ Abrir ou fechar transação
 - ❌ Controlar `TTransaction`
 
-📌 **Quem abre a conexão é sempre quem chama a Service.**
+📌 Quem abre a conexão é **sempre quem chama** a Service.
 
 ---
 
 ## ⚠️ Tratamento de erros na Service
 
-### Padrão obrigatório
-Sempre lançar exceções:
-
 ```php
 throw new Exception('As senhas informadas não conferem!');
 ```
 
-📌 Benefícios:
-- Interrompe execução imediatamente
-- Permite exibição da mensagem ao usuário
-- Mantém controle no fluxo do sistema
-- Integra perfeitamente com Sweet Alert
+Benefícios:
+- Interrompe execução
+- Exibe mensagem ao usuário
+- Integra com Sweet Alert
 
 ---
 
 ## 🚀 Configurações recomendadas do PHP (Produção)
 
-Essas configurações devem ser aplicadas no `php.ini` (ou `.user.ini` / `php-fpm.conf`)
-quando a aplicação estiver em produção.
+Aplicar no `php.ini` (ou `.user.ini` / `php-fpm.conf`):
 
 ```ini
 display_errors = Off
@@ -188,24 +176,71 @@ session.use_trans_sid = 0
 session.entropy_file = /dev/urandom
 session.entropy_length = 32
 session.gc_maxlifetime = 14000
+```
+
+---
+
+## 🧩 Padrão para valores fixos em tabelas (Status, Tipos, Flags)
+
+Sempre que existir valores fixos (status, situações, tipos), **criar constantes no Model**.
+
+### Exemplo
+
+```php
+class Pedido extends TRecord
+{
+    const STATUS_ATIVO    = 1;
+    const STATUS_INATIVO  = 2;
+    const STATUS_PENDENTE = 3;
+    const STATUS_FATURADO = 4;
+}
+```
+
+### Uso correto
+
+```php
+if ($pedido->status_id == Pedido::STATUS_FATURADO) {
+    // lógica específica
+}
+```
+
+---
+
+## 🔁 Padrão de nomenclatura para eventos `onChange`
+
+Sempre usar o padrão:
+
+```
+onChange[nomeDoCampo][Acao]
+```
+
+### Exemplos
+
+```php
+onChangeTipoPagamentoAtualizaParcelas
+onChangeCidadeCarregaBairros
+onChangeCursoAtualizaTurmas
+```
+
+---
 
 ## ✅ Benefícios deste padrão
 
 - Código previsível
-- Fácil leitura
+- Padronização entre projetos
 - Menos bugs em produção
-- Melhor experiência do usuário
-- Padronização entre equipes e projetos
+- Melhor UX
+- Facilidade de manutenção
 
 ---
 
 ## 📎 Observação final
 
-Este padrão é **flexível**, mas deve ser seguido como base.
+Este padrão deve ser usado como **base obrigatória**.
 
-Ajustes são permitidos quando:
-- há necessidade técnica
-- há ganho claro de UX
-- o padrão se mantém consistente
+Exceções só são aceitas quando:
+- houver necessidade técnica clara
+- houver ganho real de UX
+- a decisão for documentada
 
-Documente qualquer exceção ao padrão.
+Padrão seguido = projeto saudável.
