@@ -38,258 +38,386 @@ Ele foi pensado para:
 > - Área de código de barras  
 
 ```html
+<!DOCTYPE html>
 <html charset="UTF-8">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="robots" content="noindex" />
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .document {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 10mm;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .bordered {
+            border: 1px solid #000;
+        }
+        .cell-bordered {
+            border: 1px solid #000;
+            padding: 3px 5px;
+            vertical-align: top;
+        }
+        .label {
+            font-size: 8pt;
+            font-weight: bold;
+        }
+        .value {
+            font-size: 12pt;
+        }
+        .value-bold {
+            font-size: 12pt;
+            font-weight: bold;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-small {
+            font-size: 8pt;
+        }
+        .linha-corte {
+            border-top: 1px dashed #000;
+            margin: 10px 0;
+            padding-top: 5px;
+            text-align: right;
+            font-size: 8pt;
+        }
+        .codigo-barras-container {
+            background-color: #fff;
+            padding: 5px 0;
+            text-align: center;
+        }
+        .header-logo {
+            width: 24%;
+            text-align: center;
+            vertical-align: middle;
+            padding: 5px;
+        }
+        .header-info {
+            width: 76%;
+            padding: 5px;
+            vertical-align: middle;
+        }
+        .banco-header {
+            border-right: 1px solid #000;
+        }
+        .aviso-seguranca {
+            background-color: #ffffcc;
+            padding: 5px;
+            margin: 10px 0;
+            border: 1px solid #ffcc00;
+            font-size: 9pt;
+        }
+        p {
+            margin: 2px 0;
+        }
+    </style>
 </head>
-
-<body style="background-color: #fff; margin-right: 0; font-family: 'Arial';">
-    <div class="document" style="margin: auto auto; width: 190mm; height: auto; background-color: #fff;">
-        <br />
-        <table style="border-collapse: collapse; width: 100%; border-style: none; margin-left: auto; margin-right: auto; height: 1178px;">
-            <tbody>
-                <tr style="height: 200px;">
-                    <td style="width: 100%; height: 200px; text-align: left; vertical-align: top;">
-                        <table style="border-collapse: collapse; width: 100%; height: 188px; border-color: #000000; border-style: solid;" border="1">
-                            <tbody>
-                                <tr style="height: 22px;">
-                                    <td style="width: 24.2532%; height: 88px; border-color: #000000; border-style: solid; text-align: center; vertical-align: middle;" rowspan="4"><img src="{$cobranca->escola->logotipo}" alt="logo" height="88px" /></td>
-                                    <td style="width: 75.7468%; height: 22px; border-style: none; vertical-align: middle;"><span style="font-size: 10pt;"><strong>Razão Social:</strong> {$cobranca->escola->razao_social}</span></td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="width: 75.7468%; height: 22px; border-style: none; vertical-align: middle;"><span style="font-size: 10pt;"><strong>Endereço:</strong> {$cobranca->escola->cep->logradouro}, {$cobranca->escola->endereco_numero}, {$cobranca->escola->endereco_complemento}, {$cobranca->escola->cep->bairro}, {$cobranca->escola->cep->cidade}-{$cobranca->escola->cep->uf}<br /></span></td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="width: 75.7468%; height: 22px; border-style: none; vertical-align: middle;"><span style="font-size: 10pt;"><strong>E-mail:</strong> {$cobranca->escola->email_financeiro}</span></td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="width: 75.7468%; height: 22px; border-style: none; vertical-align: middle;"><span style="font-size: 10pt;"><strong>Telefone:</strong> {$cobranca->escola->telefone_financeiro}</span></td>
-                                </tr>
-                                <tr style="height: 94px;">
-                                    <td style="width: 100%; height: 100px; border-color: #000000; border-style: solid; vertical-align: top;" colspan="2">
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Curso: {$cobranca->matricula->curso->curso}</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Data de Início: {$cobranca->matricula->turma->data_inicio}</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Aluno: {$cobranca->matricula->cliente->nome}</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Matrícula: {$cobranca->matricula_id}</span></p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p style="margin: 1px 0;"> </p>
-                    </td>
-                </tr>
-                <tr style="height: 330px;">
-                    <td style="width: 100%; height: 330px; text-align: left; vertical-align: top;">
-                        <table style="border-collapse: collapse; width: 100%; border-color: #000000; border-style: solid;" border="1" cellpadding="5">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 100%;" colspan="5">
-                                        <table style="border-collapse: collapse; width: 100%; border-style: hidden; margin: -5px;" cellpadding="5">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 20.3504%; border-right-style: solid; border-right-width: 1px; border-right-color: #000000; text-align: center; vertical-align: middle;"><img src="{$cobranca->tipo_pagamento->gateway_pagamento->logo_banco}" alt="logo do banco" height="40px" /></td>
-                                                    <td style="width: 11.7561%; text-align: center; vertical-align: middle; border-right-style: solid; border-right-width: 1px; border-right-color: #000000;"><strong>{$cobranca->tipo_pagamento->gateway_pagamento->cod_banco}</strong></td>
-                                                    <td style="width: 71.4909%; text-align: right; vertical-align: middle;">{$linha_digitavel}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 100%; border-color: #000000; border-style: solid; vertical-align: top;" colspan="5">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Beneficiário:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->escola->razao_social} - CNPJ {$cobranca->escola->cnpj}</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->escola->cep->logradouro}, {$cobranca->escola->endereco_complemento}, {$cobranca->escola->cep->bairro}, {$cobranca->escola->cep->cidade}-{$cobranca->escola->cep->uf}</span></p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 18.8706%; border-color: #000000; border-style: solid; vertical-align: top;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Nº Documento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$numero_documento_remessa}</span></p>
-                                    </td>
-                                    <td style="width: 22.9957%; border-color: #000000; border-style: solid; vertical-align: top;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Nosso Número:</span></strong></p>
-                                        <p style="margin: 1px 0;">{$nosso_numero}</p>
-                                    </td>
-                                    <td style="width: 20.1337%; border-color: #000000; border-style: solid; vertical-align: top;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Data de Processamento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$data_geracao}</span></p>
-                                    </td>
-                                    <td style="width: 18%; border-color: #000000; border-style: solid; vertical-align: top;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Vencimento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 12pt;">{$cobranca->data_vencimento}</span></strong></p>
-                                    </td>
-                                    <td style="width: 20%; border-color: #000000; border-style: solid; vertical-align: top;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Valor:</span></strong></p>
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 12pt;">{$valor_cobranca}</span></strong></p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 100%; border-color: #000000; border-style: solid; vertical-align: top;" colspan="5">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Instruções:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Não aceitar após vencimento</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Não aceitar pagamento com Cheque</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Multa de {$cobranca->tipo_pagamento->juros_multa}% por atraso e juros de {$cobranca->tipo_pagamento->juros_atraso}% ao dia.</span></p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 100%; vertical-align: top;" colspan="5">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Pagador:</span></strong></p>
-                                        <p style="margin: 1px 0;">{$cobranca->cliente->nome} - {$cobranca->cliente->cpf_cnpj}</p>
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Endereço:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->cliente->cep->logradouro}, {$cobranca->cliente->endereco_numero} {$cobranca->cliente->endereco_complemento}, {$cobranca->cliente->cep->bairro}, {$cobranca->cliente->cep->cidade}-{$cobranca->cliente->cep->uf} CEP {$cobranca->cliente->cep->cep}</span></p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p style="margin: 1px 0px; text-align: right;"><span style="font-size: 8pt;">Autenticação mecânica</span></p>
-                        <p style="margin: 1px 0px; text-align: right;"><span style="font-size: 8pt;">Recibo do pagador</span></p>
-                    </td>
-                </tr>
-                <tr style="height: 35px;">
-                    <td style="width: 100%; height: 35px; text-align: center; vertical-align: middle;">
-                        <p style="margin: 1px 0px; text-align: right; border-top: 1px #000 dashed;"><span style="font-size: 8pt;">Corte aqui</span></p>
-                    </td>
-                </tr>
-                <tr style="height: 340px;">
-                    <td style="width: 100%; height: 340px; vertical-align: top;">
-                        <table style="border-collapse: collapse; width: 100%; height: 354px; border-color: #000000; border-style: solid;" border="1" cellpadding="5">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 100%;" colspan="6">
-                                        <table style="border-collapse: collapse; width: 100%; border-style: hidden; margin: -5px;" cellpadding="5">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="width: 20.3504%; border-right-style: solid; border-right-width: 1px; border-right-color: #000000; text-align: center; vertical-align: middle;"><img src="{$cobranca->tipo_pagamento->gateway_pagamento->logo_banco}" alt="logo do banco" height="40px" /></td>
-                                                    <td style="width: 11.7561%; text-align: center; vertical-align: middle; border-right-style: solid; border-right-width: 1px; border-right-color: #000000;"><span style="font-size: 14pt;">{$cobranca->tipo_pagamento->gateway_pagamento->cod_banco}</span></td>
-                                                    <td style="width: 71.4909%; text-align: right; vertical-align: middle;">{$linha_digitavel}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="height: 22px; width: 76.5294%; vertical-align: top; border-color: #000000; border-style: solid;" colspan="5">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Local do pagamento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Pagável no banco</span></p>
-                                    </td>
-                                    <td style="width: 23.3286%; vertical-align: top; height: 22px; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Vencimento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 12pt;">{$cobranca->data_vencimento}</span></strong></p>
-                                    </td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="height: 22px; width: 76.5294%; vertical-align: top; border-color: #000000; border-style: solid;" colspan="5">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Beneficiário:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->escola->razao_social} - CNPJ {$cobranca->escola->cnpj}</span></p>
-                                    </td>
-                                    <td style="width: 23.3286%; vertical-align: top; height: 22px; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Agência/Código Beneficiário:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->tipo_pagamento->gateway_pagamento->agencia_banco} / {$cobranca->tipo_pagamento->gateway_pagamento->conta_banco}</span></p>
-                                    </td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="width: 17.4965%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Data do Documento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$data_geracao}</span></p>
-                                    </td>
-                                    <td style="width: 14.7938%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Nº Documento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$numero_documento_remessa}</span></p>
-                                    </td>
-                                    <td style="width: 11.8066%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Espécie doc:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">DM</span></p>
-                                    </td>
-                                    <td style="width: 11.6643%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Aceite:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">N</span></p>
-                                    </td>
-                                    <td style="width: 20.7682%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Data de  Processamento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$data_geracao}</span></p>
-                                    </td>
-                                    <td style="width: 23.3286%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Nosso número:</span></strong></p>
-                                        <p style="margin: 1px 0;">{$nosso_numero}</p>
-                                    </td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="width: 17.4965%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Uso do Banco:</span></strong></p>
-                                        <p style="margin: 1px 0;"> </p>
-                                    </td>
-                                    <td style="width: 14.7938%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Carteira:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->tipo_pagamento->gateway_pagamento->carteira_banco}</span></p>
-                                    </td>
-                                    <td style="width: 11.8066%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Moeda:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">R$</span></p>
-                                    </td>
-                                    <td style="width: 11.6643%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Quantidade:</span></strong></p>
-                                        <p style="margin: 1px 0;"> </p>
-                                    </td>
-                                    <td style="width: 20.7682%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Valor:</span></strong></p>
-                                        <p style="margin: 1px 0;"> </p>
-                                    </td>
-                                    <td style="width: 23.3286%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Valor do Documento:</span></strong></p>
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 12pt;">{$valor_cobranca}</span></strong></p>
-                                    </td>
-                                </tr>
-                                <tr style="height: 22px;">
-                                    <td style="width: 76.5294%; border-color: #000000; border-style: solid; vertical-align: top; height: 66px;" colspan="5" rowspan="3">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 10.6667px;">Instruções:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Não aceitar após vencimento</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Não aceitar pagamento com Cheque</span></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">Multa de {$cobranca->tipo_pagamento->juros_multa}% por atraso e juros de {$cobranca->tipo_pagamento->juros_atraso}% ao dia.</span></p>
-                                    </td>
-                                    <td style="width: 23.3286%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">(-) Descontos/Abatimento:</span></strong></p>
-                                    </td>
-                                </tr>
-                                <tr style="height: 26px;">
-                                    <td style="width: 23.3286%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">(+) Juros/Multa:</span></strong></p>
-                                    </td>
-                                </tr>
-                                <tr style="height: 21px;">
-                                    <td style="width: 23.3286%; height: 22px; vertical-align: top; border-color: #000000; border-style: solid;">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">(=) Valor Cobrado:</span></strong></p>
-                                    </td>
-                                </tr>
-                                <tr style="height: 93px;">
-                                    <td style="width: 99.858%; border-color: #000000; border-style: solid; vertical-align: top; height: 93px;" colspan="6">
-                                        <p style="margin: 1px 0;"><strong><span style="font-size: 8pt;">Pagador:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->cliente->nome} - {$cobranca->cliente->cpf_cnpj}<br /></span><strong><span style="font-size: 8pt;">Endereço:</span></strong></p>
-                                        <p style="margin: 1px 0;"><span style="font-size: 12pt;">{$cobranca->cliente->cep->logradouro}, {$cobranca->cliente->endereco_numero} {$cobranca->cliente->endereco_complemento}, {$cobranca->cliente->cep->bairro}, {$cobranca->cliente->cep->cidade}-{$cobranca->cliente->cep->uf} CEP {$cobranca->cliente->cep->cep}</span></p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table style="border-collapse: collapse; width: 100%;">
-                            <tbody>
-                                <tr>
-                                    <td style="width: 76.0313%; height: 90px; text-align: center; vertical-align: middle;">{$codigoBarrasBoletoPNG}</td>
-                                    <td style="width: 23.9687%; text-align: right; vertical-align: top;">
-                                        <p style="margin: 1px 0px; text-align: right;"><span style="font-size: 8pt;">Autenticação mecânica</span></p>
-                                        <p style="margin: 1px 0px; text-align: right;"><span style="font-size: 8pt;">Ficha de Compensação</span></p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
+<body>
+    <div class="document">
+        
+        <!-- RECIBO DO PAGADOR (Parte Superior) -->
+        <table class="bordered">
+            <tr>
+                <td class="cell-bordered header-logo" rowspan="4">
+                    <img src="{$cobranca->escola->logotipo}" alt="Logo" style="max-height: 88px; max-width: 100%;" />
+                </td>
+                <td class="cell-bordered header-info">
+                    <span class="label">Razão Social:</span> <span class="value">{$cobranca->escola->razao_social}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered header-info">
+                    <span class="label">Endereço:</span> <span class="value">{$cobranca->escola->cep->logradouro}, {$cobranca->escola->endereco_numero}, {$cobranca->escola->endereco_complemento}, {$cobranca->escola->cep->bairro}, {$cobranca->escola->cep->cidade}-{$cobranca->escola->cep->uf}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered header-info">
+                    <span class="label">E-mail:</span> <span class="value">{$cobranca->escola->email_financeiro}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered header-info">
+                    <span class="label">Telefone:</span> <span class="value">{$cobranca->escola->telefone_financeiro}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="2" style="padding: 8px 5px;">
+                    <p><span class="value">Curso: {$cobranca->matricula->curso->curso}</span></p>
+                    <p><span class="value">Data de Início: {$cobranca->matricula->turma->data_inicio}</span></p>
+                    <p><span class="value">Aluno: {$cobranca->matricula->cliente->nome}</span></p>
+                    <p><span class="value">Matrícula: {$cobranca->matricula_id}</span></p>
+                </td>
+            </tr>
         </table>
+
+        <br />
+
+        <!-- Recibo do Pagador - Dados do Boleto -->
+        <table class="bordered">
+            <tr>
+                <td class="cell-bordered" colspan="5">
+                    <table style="border: none; margin: -3px;">
+                        <tr>
+                            <td style="width: 20%; border-right: 1px solid #000; text-align: center; padding: 5px;">
+                                <img src="{$cobranca->tipo_pagamento->gateway_pagamento->logo_banco}" alt="Banco" style="max-height: 40px;" />
+                            </td>
+                            <td style="width: 12%; border-right: 1px solid #000; text-align: center; vertical-align: middle; padding: 5px;">
+                                <span style="font-size: 14pt; font-weight: bold;">{$cobranca->tipo_pagamento->gateway_pagamento->cod_banco}</span>
+                            </td>
+                            <td style="width: 68%; text-align: right; vertical-align: middle; padding: 5px;">
+                                <span class="value">{$linha_digitavel}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="5">
+                    <p><span class="label">Beneficiário:</span></p>
+                    <p><span class="value">{$cobranca->escola->razao_social} - CNPJ {$cobranca->escola->cnpj}</span></p>
+                    <p><span class="value">{$cobranca->escola->cep->logradouro}, {$cobranca->escola->endereco_complemento}, {$cobranca->escola->cep->bairro}, {$cobranca->escola->cep->cidade}-{$cobranca->escola->cep->uf}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 19%;">
+                    <p><span class="label">Nº Documento:</span></p>
+                    <p><span class="value">{$numero_documento_remessa}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 23%;">
+                    <p><span class="label">Nosso Número:</span></p>
+                    <p><span class="value">{$nosso_numero}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 20%;">
+                    <p><span class="label">Data de Processamento:</span></p>
+                    <p><span class="value">{$data_geracao}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 18%;">
+                    <p><span class="label">Vencimento:</span></p>
+                    <p><span class="value-bold">{$cobranca->data_vencimento}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 20%;">
+                    <p><span class="label">Valor:</span></p>
+                    <p><span class="value-bold">{$valor_cobranca}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="5" style="height: 60px;">
+                    <p><span class="label">Instruções:</span></p>
+                    <p><span class="value">Não aceitar após vencimento</span></p>
+                    <p><span class="value">Não aceitar pagamento com Cheque</span></p>
+                    <p><span class="value">Multa de {$cobranca->tipo_pagamento->juros_multa}% por atraso e juros de {$cobranca->tipo_pagamento->juros_atraso}% ao dia.</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="5">
+                    <p><span class="label">Pagador:</span></p>
+                    <p><span class="value">{$cobranca->cliente->nome} - {$cobranca->cliente->cpf_cnpj}</span></p>
+                    <p><span class="label">Endereço:</span></p>
+                    <p><span class="value">{$cobranca->cliente->cep->logradouro}, {$cobranca->cliente->endereco_numero} {$cobranca->cliente->endereco_complemento}, {$cobranca->cliente->cep->bairro}, {$cobranca->cliente->cep->cidade}-{$cobranca->cliente->cep->uf} CEP {$cobranca->cliente->cep->cep}</span></p>
+                </td>
+            </tr>
+        </table>
+
+        <p class="text-right text-small">Autenticação mecânica - Recibo do pagador</p>
+
+        <!-- Linha de Corte -->
+        <div class="linha-corte">
+            Corte aqui
+        </div>
+
+        <!-- Aviso de Segurança -->
+        <div class="aviso-seguranca">
+            <strong>⚠ IMPORTANTE:</strong> Não dobre, não amasse e não rasure este boleto. Isso pode dificultar a leitura do código de barras.
+        </div>
+
+        <!-- FICHA DE COMPENSAÇÃO (Parte Inferior) -->
+        <table class="bordered">
+            <tr>
+                <td class="cell-bordered" colspan="6">
+                    <table style="border: none; margin: -3px;">
+                        <tr>
+                            <td style="width: 20%; border-right: 1px solid #000; text-align: center; padding: 5px;">
+                                <img src="{$cobranca->tipo_pagamento->gateway_pagamento->logo_banco}" alt="Banco" style="max-height: 40px;" />
+                            </td>
+                            <td style="width: 12%; border-right: 1px solid #000; text-align: center; vertical-align: middle; padding: 5px;">
+                                <span style="font-size: 18pt; font-weight: bold;">{$cobranca->tipo_pagamento->gateway_pagamento->cod_banco}</span>
+                            </td>
+                            <td style="width: 68%; text-align: right; vertical-align: middle; padding: 5px;">
+                                <span class="value">{$linha_digitavel}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="5" style="width: 77%;">
+                    <p><span class="label">Local de Pagamento:</span></p>
+                    <p><span class="value">Pagável em qualquer banco até o vencimento</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 23%;">
+                    <p><span class="label">Vencimento:</span></p>
+                    <p><span class="value-bold">{$cobranca->data_vencimento}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="5" style="width: 77%;">
+                    <p><span class="label">Beneficiário:</span></p>
+                    <p><span class="value">{$cobranca->escola->razao_social} - CNPJ {$cobranca->escola->cnpj}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 23%;">
+                    <p><span class="label">Agência/Código Beneficiário:</span></p>
+                    <p><span class="value">{$cobranca->tipo_pagamento->gateway_pagamento->agencia_banco} / {$cobranca->tipo_pagamento->gateway_pagamento->conta_banco}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 17.5%;">
+                    <p><span class="label">Data do Documento:</span></p>
+                    <p><span class="value">{$data_documento}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 14.8%;">
+                    <p><span class="label">Nº Documento:</span></p>
+                    <p><span class="value">{$numero_documento_remessa}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 11.8%;">
+                    <p><span class="label">Espécie Doc.:</span></p>
+                    <p><span class="value">DM</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 11.7%;">
+                    <p><span class="label">Aceite:</span></p>
+                    <p><span class="value">N</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 20.7%;">
+                    <p><span class="label">Data de Processamento:</span></p>
+                    <p><span class="value">{$data_geracao}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 23.5%;">
+                    <p><span class="label">Nosso Número:</span></p>
+                    <p><span class="value">{$nosso_numero}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 17.5%;">
+                    <p><span class="label">Uso do Banco:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 14.8%;">
+                    <p><span class="label">Carteira:</span></p>
+                    <p><span class="value">{$cobranca->tipo_pagamento->gateway_pagamento->carteira_banco}</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 11.8%;">
+                    <p><span class="label">Espécie:</span></p>
+                    <p><span class="value">R$</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 11.7%;">
+                    <p><span class="label">Quantidade:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 20.7%;">
+                    <p><span class="label">Valor Unitário:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 23.5%;">
+                    <p><span class="label">Valor do Documento:</span></p>
+                    <p><span class="value-bold">{$valor_cobranca}</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="5" rowspan="6" style="width: 77%; vertical-align: top;">
+                    <p><span class="label">Instruções de Responsabilidade do Beneficiário:</span></p>
+                    <p><span class="value">Não aceitar após vencimento</span></p>
+                    <p><span class="value">Não aceitar pagamento com Cheque</span></p>
+                    <p><span class="value">Multa de {$cobranca->tipo_pagamento->juros_multa}% por atraso e juros de {$cobranca->tipo_pagamento->juros_atraso}% ao dia.</span></p>
+                    <p><span class="value">Após o vencimento cobrar multa de R$ {$valor_multa}</span></p>
+                    <p><span class="value">Protesto automático após {$dias_protesto} dias do vencimento</span></p>
+                </td>
+                <td class="cell-bordered" style="width: 23.5%;">
+                    <p><span class="label">(-) Desconto/Abatimento:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 23.5%;">
+                    <p><span class="label">(-) Outras Deduções:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 23.5%;">
+                    <p><span class="label">(+) Mora/Multa:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 23.5%;">
+                    <p><span class="label">(+) Outros Acréscimos:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 23.5%;">
+                    <p><span class="label">(=) Valor Cobrado:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" style="width: 23.5%; background-color: #f0f0f0;">
+                    <p><span class="label" style="font-size: 9pt;">Código de Baixa:</span></p>
+                    <p><span class="value">&nbsp;</span></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="cell-bordered" colspan="6" style="height: 80px; vertical-align: top;">
+                    <p><span class="label">Pagador:</span></p>
+                    <p><span class="value">{$cobranca->cliente->nome} - CPF/CNPJ: {$cobranca->cliente->cpf_cnpj}</span></p>
+                    <p><span class="label">Endereço:</span></p>
+                    <p><span class="value">{$cobranca->cliente->cep->logradouro}, {$cobranca->cliente->endereco_numero} {$cobranca->cliente->endereco_complemento}</span></p>
+                    <p><span class="value">{$cobranca->cliente->cep->bairro}, {$cobranca->cliente->cep->cidade}-{$cobranca->cliente->cep->uf} CEP {$cobranca->cliente->cep->cep}</span></p>
+                    <p><span class="label">Sacador/Avalista:</span></p>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Código de Barras -->
+        <table style="margin-top: 5px;">
+            <tr>
+                <td style="width: 70%; text-align: center; vertical-align: middle; padding: 10px; background-color: #fff;">
+                    <div class="codigo-barras-container">
+                        {$codigoBarrasBoletoPNG}
+                    </div>
+                </td>
+                <td style="width: 30%; text-align: right; vertical-align: bottom; padding: 5px;">
+                    <p class="text-small">Autenticação mecânica</p>
+                    <p class="text-small"><strong>Ficha de Compensação</strong></p>
+                </td>
+            </tr>
+        </table>
+
+        <div style="margin-top: 10px; padding: 5px; background-color: #f9f9f9; border: 1px solid #ddd; font-size: 8pt;">
+            <p><strong>Atenção:</strong> Este documento possui código de barras para facilitar o pagamento. Mantenha-o em bom estado.</p>
+            <p>SAC: {$cobranca->escola->telefone_financeiro} | Ouvidoria: (se aplicável)</p>
+        </div>
+
     </div>
 </body>
-
 </html>
 ```
 
