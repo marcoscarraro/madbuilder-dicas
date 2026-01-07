@@ -31,46 +31,44 @@ Ideal para:
 TPage::register_css(
     'formulario_publico_mobile',
     '
-    .card-header {
-        display: none !important;
+        '.card-header {
+    display: none !important;
     }
 
     .card.panel {
-        border: none !important;
-        border-color: transparent !important;
-        border-style: none !important;
-        border-width: 0 !important;
+    border: none !important;
+    border-color: transparent !important;
+    border-style: none !important;
+    border-width: 0 !important;
     }
 
     .panel-footer.card-footer {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between; /* ou center, conforme desejar */
         flex-wrap: wrap;
-        gap: 10px;
     }
 
     .form-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-between; /* ou center, conforme desejar */
         flex-wrap: wrap;
         max-width: 700px;
         margin: 0 auto;
-        padding: 16px;
+    }
+    
+    .panel-footer.card-footer {
+        display: flex;
+        justify-content: space-between; /* ou center, conforme desejar */
+        flex-wrap: wrap;
+    }
+
+    .card-footer button.btn {
+        width: 90% !important;
+        display: block !important;
+        margin: 0 auto 7px !important;
     }
     '
 );
-```
-
----
-
-## 📦 Como usar no HTML/Formulário
-
-Basta envolver o formulário com a classe:
-
-```html
-<div class="form-container">
-    <!-- formulário -->
-</div>
 ```
 
 ---
