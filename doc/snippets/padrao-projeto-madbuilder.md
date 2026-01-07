@@ -172,6 +172,23 @@ throw new Exception('As senhas informadas não conferem!');
 
 ---
 
+## 🚀 Configurações recomendadas do PHP (Produção)
+
+Essas configurações devem ser aplicadas no `php.ini` (ou `.user.ini` / `php-fpm.conf`)
+quando a aplicação estiver em produção.
+
+```ini
+display_errors = Off
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE
+
+session.use_only_cookies = 1
+session.cookie_httponly = true
+session.use_trans_sid = 0
+
+session.entropy_file = /dev/urandom
+session.entropy_length = 32
+session.gc_maxlifetime = 14000
+
 ## ✅ Benefícios deste padrão
 
 - Código previsível
