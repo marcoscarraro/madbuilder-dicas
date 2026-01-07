@@ -1,20 +1,14 @@
-# 🗃️ Consultas e Log – SQL (MadBuilder / Adianti)
+# 🗃️ Consultas e Filtros – SQL (MadBuilder / Adianti)
 
-Este arquivo reúne snippets para **consultas ao banco de dados**,
-**monitoramento de SQL**, **contagem de registros** e boas práticas
-utilizando o **Adianti / MadBuilder**.
+Este arquivo reúne snippets para **consultas ao banco de dados**
+utilizando o **Active Record do Adianti / MadBuilder**.
 
-Os exemplos abaixo focam em leitura, análise e depuração de consultas.
-
----
-
-## 🧾 Log de SQL
-
-### Exibir SQL executado na tela
-> Deve ser utilizado **apenas em desenvolvimento**
-```php
-TTransaction::setLogger(new TLoggerSTD());
-```
+O foco aqui é:
+- SELECTs
+- filtros
+- contagens
+- relacionamentos
+- boas práticas de leitura de dados
 
 ---
 
@@ -28,6 +22,8 @@ Curso::where('ativo', '=', 'S')->load();
 ---
 
 ## 🧩 Selecionar colunas específicas
+
+Utilize `select()` para reduzir carga e melhorar performance.
 
 ```php
 Calendario::select('data', 'ano')
@@ -58,7 +54,7 @@ $total = Matricula::where('turma_id', '=', $turmaId)->count();
 
 ## 🧠 Consultas condicionais
 
-### Consulta com múltiplas condições
+### Múltiplas condições
 ```php
 Pedido::where('status', '=', 'A')
     ->where('valor_total', '>', 0)
@@ -74,7 +70,8 @@ Pedido::where('status', '=', 'A')
 echo $pedido->cliente->nome;
 ```
 
-⚠️ Funciona apenas se a FK estiver corretamente definida.
+⚠️ Funciona apenas se a **FK estiver corretamente definida**
+no modelo Active Record.
 
 ---
 
@@ -97,15 +94,16 @@ try {
 
 ## ⚠️ Boas práticas
 
-- Use logs SQL somente em desenvolvimento
+- Prefira `select()` quando não precisar de todas as colunas
 - Evite consultas dentro de loops
-- Prefira métodos do Active Record
+- Utilize `count()` ao invés de `load()` para contagens
 - Sempre trate exceções com `try/catch`
 
 ---
 
 ## 📎 Observação final
 
-Este arquivo cobre **consultas e logs SQL**.  
-Para operações completas de CRUD, veja:
+Este arquivo cobre **consultas e filtros SQL**.  
+Veja também:
+- `consultas-avancadas.md`
 - `banco-de-dados.md`
