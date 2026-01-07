@@ -39,23 +39,21 @@ As validações podem ser aplicadas tanto:
 
 ---
 
-## 🎯 Validação em ações específicas
+## 🧾 Validações de documentos (Brasil)
 
-### Validar campo fora do fluxo do formulário
+### Validar CPF
 ```php
-(new TRequiredValidator)->validate('Data da aula', $dados_form->calendario_aula_id);
+(new TCPFValidator)->validate('CPF', $param['cpf']);
 ```
 
-> Muito útil em ações personalizadas que não passam pelo `onSave`.
+### Validar CNPJ
+```php
+(new TCNPJValidator)->validate('CNPJ', $param['cnpj']);
+```
 
 ---
 
-## 🔢 Validações de formato
-
-### Validar valor numérico
-```php
-(new TNumericValidator)->validate('Quantidade', $param['quantidade']);
-```
+## 📧 Validações de e-mail
 
 ### Validar e-mail
 ```php
@@ -64,7 +62,26 @@ As validações podem ser aplicadas tanto:
 
 ---
 
-## 📏 Validações de tamanho
+## 🔢 Validações numéricas
+
+### Validar valor numérico
+```php
+(new TNumericValidator)->validate('Quantidade', $param['quantidade']);
+```
+
+### Valor mínimo permitido
+```php
+(new TMinValueValidator(1))->validate('Quantidade', $param['quantidade']);
+```
+
+### Valor máximo permitido
+```php
+(new TMaxValueValidator(100))->validate('Quantidade', $param['quantidade']);
+```
+
+---
+
+## 📏 Validações de tamanho de texto
 
 ### Tamanho mínimo
 ```php
@@ -78,20 +95,50 @@ As validações podem ser aplicadas tanto:
 
 ---
 
+## 🧹 Validações ignorando HTML (texto limpo)
+
+### Tamanho mínimo (sem HTML)
+```php
+(new TStrippedTextMinLengthValidator(10))
+    ->validate('Conteúdo', $param['conteudo']);
+```
+
+### Tamanho máximo (sem HTML)
+```php
+(new TStrippedTextMaxLengthValidator(500))
+    ->validate('Conteúdo', $param['conteudo']);
+```
+
+---
+
+## 🎯 Validação em ações específicas
+
+### Validar campo fora do fluxo do formulário
+```php
+(new TRequiredValidator)->validate('Data da aula', $dados_form->calendario_aula_id);
+```
+
+---
+
 ## 🔄 Validação condicional
 
 ### Validar apenas se campo estiver preenchido
 ```php
 if (!empty($param['cpf'])) {
-    (new TRequiredValidator)->validate('CPF', $param['cpf']);
+    (new TCPFValidator)->validate('CPF', $param['cpf']);
+}
+```
+
+```php
+if (!empty($param['email'])) {
+    (new TEmailValidator)->validate('E-mail', $param['email']);
 }
 ```
 
 ---
 
-## 🧠 Validação personalizada
+## 🧠 Validação personalizada (manual)
 
-### Criar validação manual
 ```php
 if ($param['valor'] <= 0) {
     throw new Exception('O valor deve ser maior que zero');
@@ -102,7 +149,6 @@ if ($param['valor'] <= 0) {
 
 ## ⚠️ Interromper execução ao validar
 
-### Forçar erro com mensagem personalizada
 ```php
 throw new Exception('Campos obrigatórios não foram preenchidos');
 ```
@@ -112,9 +158,10 @@ throw new Exception('Campos obrigatórios não foram preenchidos');
 ## 📎 Boas práticas
 
 - Valide **sempre antes de salvar**
-- Centralize regras de negócio quando possível
+- Prefira validadores nativos do Adianti
+- Combine validações (Required + Min/Max)
 - Use mensagens claras para o usuário
-- Prefira validações simples e objetivas
+- Repopule o formulário em caso de erro
 
 Este arquivo cobre **apenas validações**.  
 Veja também:
