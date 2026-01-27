@@ -8,87 +8,48 @@ evitando exemplos genéricos e priorizando código usado em produção.
 
 ---
 
-## 📂 Estrutura da Documentação
+## Sumário / Índice (detalhado)
 
-Os conteúdos estão organizados por tecnologia e contexto.
+- [README.md](README.md) — Índice principal.
 
----
+#### PHP (doc/snippets/php/)
+- [formularios.md](doc/snippets/php/formularios.md) — Snippets para criação e tratamento de formulários, TForm, envio e recebimento de dados.
+- [banco-de-dados.md](doc/snippets/php/banco-de-dados.md) — Boas práticas com TTransaction, Active Record, exemplos de consultas e relacionamentos.
+- [mensagens-e-redirecionamento.md](doc/snippets/php/mensagens-e-redirecionamento.md) — Uso de TMessage, TToast, redirecionamentos e notificações ao usuário.
+- [validacoes.md](doc/snippets/php/validacoes.md) — Validadores nativos (TRequiredValidator, TRequiredListValidator) e exemplos de validação personalizada.
+- [debug.md](doc/snippets/php/debug.md) — Ferramentas e funções de debug (mad_dump, md, mdd) e dicas para debugar no MadBuilder.
+- [sessao-e-ambiente.md](doc/snippets/php/sessao-e-ambiente.md) — Uso de TSession, gerenciamento de ambientes e variáveis de configuração.
+- [belement-html.md](doc/snippets/php/belement-html.md) — Exemplo de uso de BElement com HTML, renderização dinâmica e templates embutidos.
+- [listagens-e-kanban.md](doc/snippets/php/listagens-e-kanban.md) — Filtros em listagens e Kanban, aplicar filtros dinâmicos e refresh de componentes.
+- [tcombo-para-switch.md](doc/snippets/php/tcombo-para-switch.md) — Como converter um TCombo para um controle tipo switch.
+- [tdaterange-opcoes.md](doc/snippets/php/tdaterange-opcoes.md) — Configurações e limitações do TDateRange.
+- [upload-tratamento-arquivos.md](doc/snippets/php/upload-tratamento-arquivos.md) — Exemplo de upload, validação e tratamento de arquivos enviados.
+- [qrcode.md](doc/snippets/php/qrcode.md) — Geração de QRCode e integrações úteis.
 
-## 🐘 PHP
+#### JavaScript / jQuery (doc/snippets/js/)
+- [scripts-jquery.md](doc/snippets/js/scripts-jquery.md) — Exemplos de uso de jQuery em views MadBuilder, manipulação do DOM e eventos.
+- [funcoes-nativas-js.md](doc/snippets/js/funcoes-nativas-js.md) — Funções JS recomendadas para trabalhar com Adianti/MadBuilder (atalhos e helpers).
+- [carregamento-dinamico.md](doc/snippets/js/carregamento-dinamico.md) — Técnicas de carregamento dinâmico (jQuery .load, __adianti_load_page) e atualizações parciais.
+- [redirecionamento.md](doc/snippets/js/redirecionamento.md) — Estratégias de redirecionamento via JS, timeouts e abertura de novas janelas.
 
-Snippets relacionados a backend, formulários, banco de dados, componentes e regras de negócio.
+#### CSS (doc/snippets/css/)
+- [estilos-inline.md](doc/snippets/css/estilos-inline.md) — Como aplicar estilos inline a elementos específicos via TPage::register_css e propriedades de componentes.
+- [estilos-globais.md](doc/snippets/css/estilos-globais.md) — Padrões e classes globais para o layout, sticky headers e ajustes de responsividade.
 
-- [Formulários](doc/snippets/php/formularios.md)
-- [Banco de Dados](doc/snippets/php/banco-de-dados.md)
-- [Mensagens e Redirecionamento](doc/snippets/php/mensagens-e-redirecionamento.md)
-- [Validações](doc/snippets/php/validacoes.md)
-- [Debug](doc/snippets/php/debug.md)
-- [Sessão e Ambiente](doc/snippets/php/sessao-e-ambiente.md)
-- [BElement com HTML](doc/snippets/php/belement-html.md)
-- [Listagens e Kanban (filtros)](doc/snippets/php/listagens-e-kanban.md)
-- [TCombo convertido para Switch](doc/snippets/php/tcombo-para-switch.md)
-- [TDateRange – Opções e Limites](doc/snippets/php/tdaterange-opcoes.md)
-- [Upload – Tratamento de Arquivos](doc/snippets/php/upload-tratamento-arquivos.md)
-- [Geração de QRCode](doc/snippets/php/qrcode.md)
+#### SQL (doc/snippets/sql/)
+- [consultas-e-filtros.md](doc/snippets/sql/consultas-e-filtros.md) — Exemplos de queries, filtros com Active Record e boas práticas.
+- [logs-sql.md](doc/snippets/sql/logs-sql.md) — Habilitar logs de SQL com TTransaction::setLogger e análise de queries.
+- [model-atributos-virtuais.md](doc/snippets/sql/model-atributos-virtuais.md) — Como criar e usar atributos virtuais em models.
 
----
+#### HTML / Templates (doc/snippets/html/)
+- [htmlrenderer-multiplas-secoes.md](doc/snippets/html/htmlrenderer-multiplas-secoes.md) — Uso de HTMLRenderer para múltiplas seções dentro de um template.
+- [modal-com-formulario.md](doc/snippets/html/modal-com-formulario.md) — Inserir formulários dentro de modais e submeter via JS/PHP.
+- [twindow-html.md](doc/snippets/html/twindow-html.md) — Exemplo de criação de TWindow que renderiza HTML dinâmico.
+- [template-html-banco-dados.md](doc/snippets/html/template-html-banco-dados.md) — Armazenar templates HTML no banco e renderizar nas views.
 
-## ⚡ JavaScript / jQuery
-
-Snippets voltados para comportamento de tela, Ajax e interações dinâmicas.
-
-- [Scripts com jQuery](doc/snippets/js/scripts-jquery.md)
-- [Funções Nativas JS (Adianti)](doc/snippets/js/funcoes-nativas-js.md)
-- [Carregamento Dinâmico](doc/snippets/js/carregamento-dinamico.md)
-- [Redirecionamento](doc/snippets/js/redirecionamento.md)
-
----
-
-## 🎨 CSS
-
-Dicas e padrões para estilização no MadBuilder.
-
-- [Estilos Inline](doc/snippets/css/estilos-inline.md)
-- [Estilos Globais](doc/snippets/css/estilos-globais.md)
-
----
-
-## 🗃️ SQL
-
-Snippets para consultas, filtros, logs e boas práticas com Active Record.
-
-- [Consultas e Filtros](doc/snippets/sql/consultas-e-filtros.md)
-- [Logs de SQL](doc/snippets/sql/logs-sql.md)
-- [Model – Atributos Virtuais](doc/snippets/sql/model-atributos-virtuais.md)
-
----
-
-## 🧩 HTML / Templates
-
-Uso de HTML dinâmico, templates e janelas modais.
-
-- [HTMLRenderer – Múltiplas Seções](doc/snippets/html/htmlrenderer-multiplas-secoes.md)
-- [Modal com Formulário](doc/snippets/html/modal-com-formulario.md)
-- [TWindow com HTML](doc/snippets/html/twindow-html.md)
-- [Template HTML salvo no Banco de Dados](doc/snippets/html/template-html-banco-dados.md)
-
----
-
-## 🛠️ Infra / Ambiente
-
-Configurações de ambiente, infraestrutura e comportamento da aplicação.
-
-- [iOS + HTTP2 + Nginx](doc/snippets/infra/ios-http2-nginx.md)
-- [Single Page – Sem parâmetros na URL](doc/snippets/infra/single-page-sem-parametros.md)
-
----
-
-## 🧠 Como usar este repositório
-
-- Cada arquivo contém **snippets isolados e prontos para uso**
-- Os exemplos refletem **uso real no MadBuilder**
-- Copie, adapte e evolua conforme sua necessidade
-- Os arquivos são independentes entre si
+#### Infra / Ambiente (doc/snippets/infra/)
+- [ios-http2-nginx.md](doc/snippets/infra/ios-http2-nginx.md) — Ajustes de Nginx / HTTP2 para compatibilidade com iOS e resolução de erros de conexão.
+- [single-page-sem-parametros.md](doc/snippets/infra/single-page-sem-parametros.md) — Estratégias para aplicações single-page sem exibir parâmetros na URL.
 
 ---
 
