@@ -36,9 +36,10 @@ Este documento define os **padrões oficiais de UI/UX** adotados nos projetos, c
 **Ordem visual**
 1. Cadastrar
 2. Atualizar
-3. Campo de busca
-4. Buscar
-5. Limpar filtros
+3. Filtros
+4. Campo de busca
+5. Buscar
+6. Limpar filtros
 
 ---
 
