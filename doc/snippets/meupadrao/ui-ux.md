@@ -163,6 +163,91 @@ Usados para ações destrutivas:
 
 ---
 
+## 📐 Posicionamento da Coluna de Ações
+
+- A **coluna de ações deve ficar sempre à direita da tabela**
+- **Nunca** posicionar ações no início da linha
+
+### 🎯 Motivo
+- O usuário primeiro **lê os dados**
+- Depois **decide agir**
+- Respeita o fluxo natural de leitura: **esquerda → direita**
+- Reduz cliques acidentais e erros de operação
+
+---
+
+## 🧭 Organização das Ações
+
+### 🔘 Quando usar botões diretos
+
+Usar **apenas quando houver até 2 ações**:
+
+**Exemplos:**
+- Editar
+- Visualizar
+
+📌 Ideal para ações simples e frequentes.
+
+---
+
+### ⋮ Quando usar menu de ações (três pontos)
+
+Usar **obrigatoriamente** quando:
+- Existirem **3 ou mais ações**
+- As ações tiverem **naturezas diferentes**
+- Houver **ações destrutivas** (Excluir, Cancelar, Bloquear)
+
+**Exemplos de ações no menu:**
+- Editar
+- Enviar arquivo
+- Gerar contrato
+- Excluir
+
+📌 Evita poluição visual e reduz riscos.
+
+---
+
+## 🎨 Regras Visuais
+
+- Ações devem ser **discretas**
+- Preferir **ícones** ao invés de texto
+- Não chamar mais atenção que os dados
+
+### 🔴 Ações Destrutivas
+- **Nunca** destacar visualmente
+- **Sempre** dentro de menu
+- **Confirmação obrigatória** (Sweet Alert)
+
+---
+
+## 📊 Ordenação e Alinhamento
+
+### Coluna de Ações
+- ❌ Não ordenável
+- ✅ Alinhamento à direita
+
+### Conteúdo da Tabela
+- Informações textuais → alinhadas à esquerda
+- Valores monetários → alinhados à direita
+
+---
+
+## ✅ Benefícios deste Padrão
+
+- Menor carga cognitiva
+- Menos cliques acidentais
+- Interface previsível
+- Melhor experiência em desktop e mobile
+- Consistência entre telas e projetos
+
+---
+
+## 🧠 Regra de Ouro
+
+> **Dados primeiro, ação por último.**
+
+---
+
 ### 📐 Formatação obrigatória de dados
 
 Nunca exibir dados “crus” ao usuário:
