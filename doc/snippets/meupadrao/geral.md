@@ -98,6 +98,9 @@ Este documento define os **padrões oficiais de UI/UX** adotados nos projetos, c
 
 ## 6️⃣ Regras Gerais de Navegação
 
+- Ação → **Cortina**
+- Consulta → **Modal**
+
 ### LIST e FORM
 
 - **Sem ícone no menu lateral**
