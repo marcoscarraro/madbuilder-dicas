@@ -236,15 +236,3 @@ Se o dado é exibido ao usuário, ele **precisa estar legível e formatado**.
 - Experiência consistente entre sistemas
 
 ---
-
-## 📎 Observação de Maturidade UX (Opcional)
-
-Em telas muito grandes (ultrawide), o modal de 90% pode ficar largo demais para leitura.
-
-➡️ Se necessário:
-- Manter modal em `90%`
-- Limitar conteúdo interno com `max-width` (ex: `1200px`)
-
-Não obrigatório — apenas refinamento futuro.
-
----
