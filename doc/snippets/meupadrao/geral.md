@@ -83,7 +83,7 @@ Este documento define os **padrões oficiais de UI/UX** adotados nos projetos, c
   crossorigin="anonymous"
   referrerpolicy="no-referrer"
 />
-```html
+´´´html
 ---
 
 ## 5️⃣ Padrão – Gerador de CRUD
