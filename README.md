@@ -25,6 +25,7 @@ evitando exemplos genéricos e priorizando código usado em produção.
 - [tdaterange-opcoes.md](doc/snippets/php/tdaterange-opcoes.md) — Configurações e limitações do TDateRange.
 - [upload-tratamento-arquivos.md](doc/snippets/php/upload-tratamento-arquivos.md) — Exemplo de upload, validação e tratamento de arquivos enviados.
 - [qrcode.md](doc/snippets/php/qrcode.md) — Geração de QRCode e integrações úteis.
+- [filtro-default-listagem.md](doc/snippets/php/filtro-default-listagem.md) - Aplicar filtro default em uma listagem sem confliar com os filtros disponíveis na listagem.
 
 #### JavaScript / jQuery (doc/snippets/js/)
 - [scripts-jquery.md](doc/snippets/js/scripts-jquery.md) — Exemplos de uso de jQuery em views MadBuilder, manipulação do DOM e eventos.
