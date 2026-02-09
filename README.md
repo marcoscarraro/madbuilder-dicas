@@ -41,6 +41,7 @@ evitando exemplos genéricos e priorizando código usado em produção.
 - [consultas-e-filtros.md](doc/snippets/sql/consultas-e-filtros.md) — Exemplos de queries, filtros com Active Record e boas práticas.
 - [logs-sql.md](doc/snippets/sql/logs-sql.md) — Habilitar logs de SQL com TTransaction::setLogger e análise de queries.
 - [model-atributos-virtuais.md](doc/snippets/sql/model-atributos-virtuais.md) — Como criar e usar atributos virtuais em models.
+- [update-com-where.md](doc/snippets/sql/update-com-where.md) - Update em massa em registros usando where.
 
 #### HTML / Templates (doc/snippets/html/)
 - [htmlrenderer-multiplas-secoes.md](doc/snippets/html/htmlrenderer-multiplas-secoes.md) — Uso de HTMLRenderer para múltiplas seções dentro de um template.
