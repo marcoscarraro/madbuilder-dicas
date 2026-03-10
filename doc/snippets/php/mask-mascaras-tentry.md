@@ -52,21 +52,31 @@ TEntry::changeMask(self::$formName, 'cnpj', '99.999.999/9999-99');
 
 ### CPF ou CNPJ (definir dinamicamente via JS)
 ```php
-        // Adiciona o comportamento dinâmico via jQuery
-        TScript::create("
-            $('[name=\"cpf_cnpj\"]').on('keyup', function() {
-                var digitos = $(this).val().replace(/\D/g, '');
-                var total   = digitos.length;
+        $cpfOuCnpj   = $param['cpf_cnpj'] ?? '';
+        $digitos = preg_replace('/\D/', '', $cpfOuCnpj);
+        $total   = strlen($digitos);
 
-                if (total > 11 && total <= 14) {
-                    $(this).mask('00.000.000/0000-00');    
-                } else if (total => 1 && total <= 11) {
-                    $(this).mask('000.000.000-00');
-                } else {
-                    $(this).unmask();
-                }
-            });
-        ");
+        if ($total > 11) {
+            TEntry::changeMask(self::$formName, 'cpf_cnpj', '99.999.999/9999-99');
+            $dadosCnpj = CnpjService::get($cpfOuCnpj);
+            md($dadosCnpj);
+            $object = new stdClass();
+            $object->nome_razao_social = $dadosCnpj->razao_social;
+            $object->apelido_fantasia = $dadosCnpj->estabelecimento->nome_fantasia;
+            $object->rg_ie = $dadosCnpj->estabelecimento->inscricoes_estaduais[0]->inscricao_estadual;
+            $object->telefone = $dadosCnpj->estabelecimento->ddd1.''.$dadosCnpj->estabelecimento->telefone1;
+            $object->email = $dadosCnpj->estabelecimento->email;
+            $object->cep = $dadosCnpj->estabelecimento->cep;
+            $object->logradouro = $dadosCnpj->estabelecimento->logradouro;
+            $object->numero = $dadosCnpj->estabelecimento->numero;
+            $object->bairro = $dadosCnpj->estabelecimento->bairro;
+            $object->complemento = $dadosCnpj->estabelecimento->complemento;
+            TForm::sendData(self::$formName, $object);
+        }elseif($total > 0 && $total <= 11){
+            TEntry::changeMask(self::$formName, 'cpf_cnpj', '999.999.999-99');
+        }else{
+            TScript::create("$('[name=\"cpf_cnpj\"]').unmask();");
+        }
 ```
 
 📌 Para CPF/CNPJ dinâmico, recomenda-se usar JS para alternar a máscara.
