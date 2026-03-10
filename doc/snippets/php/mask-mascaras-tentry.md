@@ -52,8 +52,21 @@ TEntry::changeMask(self::$formName, 'cnpj', '99.999.999/9999-99');
 
 ### CPF ou CNPJ (definir dinamicamente via JS)
 ```php
-// Exemplo básico de CPF
-TEntry::changeMask(self::$formName, 'documento', '999.999.999-99');
+        // Adiciona o comportamento dinâmico via jQuery
+        TScript::create("
+            $('[name=\"cpf_cnpj\"]').on('keyup', function() {
+                var digitos = $(this).val().replace(/\D/g, '');
+                var total   = digitos.length;
+
+                if (total > 11 && total <= 14) {
+                    $(this).mask('00.000.000/0000-00');    
+                } else if (total => 1 && total <= 11) {
+                    $(this).mask('000.000.000-00');
+                } else {
+                    $(this).unmask();
+                }
+            });
+        ");
 ```
 
 📌 Para CPF/CNPJ dinâmico, recomenda-se usar JS para alternar a máscara.
